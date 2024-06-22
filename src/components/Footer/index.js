@@ -1,0 +1,132 @@
+import "./style.css";
+
+import { ReactComponent as FacebookIcon } from "assets/icons/facebook.svg";
+import { ReactComponent as InstagramIcon } from "assets/icons/instagram.svg";
+import { ReactComponent as LinkedinIcon } from "assets/icons/linkedin.svg";
+import React from "react";
+import { ReactComponent as TwLogo } from "assets/icons/tw-white-icons.svg";
+import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
+import { ReactComponent as YoutubeIcon } from "assets/icons/youtube.svg";
+import styled from "styled-components";
+
+const Footer = () => {
+  return (
+    <Wrapper>
+      <MenuWrapper>
+        <TwLogo className="logo" />
+        <MenuItemWrapper>
+          <MenuItem>
+            <MenuHeader>Beranda</MenuHeader>
+            <p>Sport Class</p>
+            <p>Booking Ruangan</p>
+          </MenuItem>
+          <MenuItem>
+            <MenuHeader>History</MenuHeader>
+            <p>Cek History</p>
+          </MenuItem>
+        </MenuItemWrapper>
+        <MenuItem>
+          <MenuHeader>Ikuti Kami</MenuHeader>
+          <SocialMediaWrapper>
+            <FacebookIcon />
+            <TwitterIcon />
+            <InstagramIcon />
+            <YoutubeIcon />
+            <LinkedinIcon />
+          </SocialMediaWrapper>
+        </MenuItem>
+      </MenuWrapper>
+      <CopyRightWrapper>
+        <p>
+          © 2020 PT Telkom Indonesia (Persero) Tbk. Hak Cipta Dilindungi
+          Undang-Undang
+        </p>
+        <CopyRight>
+          <p>Hubungi Kami</p>
+          <p>Syarat & Ketentuan</p>
+          <p>Kebijakan & Privasi</p>
+        </CopyRight>
+      </CopyRightWrapper>
+    </Wrapper>
+  );
+};
+
+export default Footer;
+
+const Wrapper = styled.div`
+  height: 312px;
+  background-color: #25282b;
+  padding: 48px 72px 48px 72px;
+  color: white;
+  display: grid;
+  align-content: space-between;
+  @media screen and (max-width: 768px) {
+    height: auto;
+    padding: 24px 24px;
+  }
+`;
+
+const MenuWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    display: grid;
+    margin-bottom: 36px;
+    & .logo {
+      width: 60vw;
+      height: auto;
+      margin-bottom: 36px;
+    }
+  }
+`;
+
+const MenuItemWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 36px;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: unser;
+  }
+`;
+
+const MenuItem = styled.div`
+  display: grid;
+`;
+
+const MenuHeader = styled.div`
+  font-weight: 600;
+  margin-bottom: 24px;
+  cursor: unset;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 14px;
+  }
+`;
+
+const SocialMediaWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+const CopyRightWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid white;
+  padding-top: 24px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 36px;
+  }
+`;
+
+const CopyRight = styled.div`
+  display: flex;
+  gap: 8px;
+  @media screen and (max-width: 768px) {
+    display: grid;
+    gap: 24px;
+    order: -1;
+  }
+`;

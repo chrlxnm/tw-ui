@@ -1,0 +1,39 @@
+.tw-footer {
+    height: 312px;
+    background-color: #25282B;
+    padding: 48px 72px 48px 72px;
+    color: white;
+    display: grid;
+    align-content: space-between
+}
+
+.tw-footer .menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tw-footer .menu .header {
+    font-weight: 600;
+    margin-bottom: 24px;
+    cursor: unset;
+}
+
+.tw-footer .menu p {
+    cursor: pointer;
+}
+
+.tw-footer .home {
+    display: grid;
+}
+
+.tw-footer .tw-cr {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid white;
+    padding-top: 24px;
+}
+
+.tw-footer .tw-cr .right-section {
+    display: flex;
+    gap: 8px;
+}
