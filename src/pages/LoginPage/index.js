@@ -29,14 +29,14 @@ const LoginPage = () => {
   return (
     <Wrapper>
       <LeftWrapper>
-        <Carousel autoplay className="ml-[4rem]">
+        <Carousel autoplay>
           <div className="grid w-[60%]">
             <BigTitle>
               Selamat datang, Rekans!
             </BigTitle>
-            <p className="w-[25%] text-[18px] text-white">
+            <Description>
               Tetap semangat dan selamat bekerja!
-            </p>
+            </Description>
           </div>
           <BigTitle>Mari semangat!</BigTitle>
           <BigTitle>Bekerja</BigTitle>
@@ -115,12 +115,18 @@ const LeftWrapper = styled.div`
   background-color: red;
   padding: 48px 48px 24px 24px;
   height: 100vh;
+  .ant-carousel{
+    margin-left: 4rem;
+  }
   @media screen and (max-width: 768px) {
     width: 100vw;
     order: 2;
     padding: 12px;
-    height: 250px;
+    height: 300px;
     padding: 24px;
+    .ant-carousel{
+      margin-left: unset;
+    }
   }
 `;
 
@@ -142,6 +148,14 @@ const BigTitle = styled.p`
   color: white;
   @media screen and (max-width: 768px) {
     font-size: 32px;
+  }
+`;
+const Description = styled.p`
+  font-size: 18px;
+  color: white;
+  width: 25%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
   }
 `;
 
