@@ -70,6 +70,9 @@ export default SportClasses;
 
 const Wrapper = styled.div`
   padding: 80px;
+  @media screen and (max-width: 480px) {
+    padding: 24px;
+  }
 `;
 const HeaderWrapper = styled.div`
   display: flex;

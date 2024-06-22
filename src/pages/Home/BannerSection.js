@@ -45,6 +45,10 @@ const Banner = styled.div`
   @media screen and (max-width: 768px) {
   height: 300px;
   }
+  
+  @media screen and (max-width: 480px) {
+    height: 250px;
+  }
 `;
 
 const BumnWrapper = styled.div`
@@ -62,6 +66,10 @@ const BannerTextWrapper = styled.div`
     width: 70%;
     padding: 12px;
   }
+  
+  @media screen and (max-width: 480px) {
+    gap: 8px;
+  }
 `;
 
 const BannerTitle = styled.div`
@@ -72,6 +80,10 @@ const BannerTitle = styled.div`
   @media screen and (max-width: 768px) {
   font-size: 20px;
 }
+  
+@media screen and (max-width: 480px) {
+  font-size: 16px;
+}
 `;
 
 const BannerDescription = styled.div`
@@ -81,5 +93,9 @@ const BannerDescription = styled.div`
 
   @media screen and (max-width: 768px) {
   font-size: 12px;
+}
+  
+@media screen and (max-width: 480px) {
+  font-size: 8px;
 }
 `;

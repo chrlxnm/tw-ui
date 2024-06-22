@@ -47,6 +47,10 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 992px) {
     height: 350px;
   }
+  @media screen and (max-width: 480px) {
+    margin: 0 24px;
+    height: 250px;
+  }
 `;
 
 const BannerTextWrapper = styled.div`
@@ -68,12 +72,16 @@ const Title = styled.p`
   font-size: 36px;
   font-weight: 700;
   color: #ffffff;
-  
+
   @media screen and (max-width: 768px) {
     font-size: 20px;
   }
   @media only screen and (max-width: 992px) {
     font-size: 24px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 16px;
   }
 `;
 const Description = styled.p`
@@ -85,5 +93,9 @@ const Description = styled.p`
   }
   @media only screen and (max-width: 992px) {
     font-size: 14px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
   }
 `;
