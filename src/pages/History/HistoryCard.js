@@ -1,5 +1,7 @@
 import { ButtonPrimary } from "components/Button";
+import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import React from "react";
+import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
 
 const HistoryCard = (props) => {
@@ -8,10 +10,16 @@ const HistoryCard = (props) => {
       <Item>
         <Title>Poundfit</Title>
         <Date>Senin, 27 Mei 2024</Date>
-        <BadgeWrapper>
-          <GreyBadge>Kuota 20 orang</GreyBadge>
-          <GreyBadge>16.00-17.00</GreyBadge>
-        </BadgeWrapper>
+          <BadgeWrapper>
+            <GreyBadge>
+              <Users />
+              Kuota 20 orang
+            </GreyBadge>
+            <GreyBadge>
+              <Clock />
+              16.00-17.00
+            </GreyBadge>
+          </BadgeWrapper>
       </Item>
       <RightSideWrapper>
         <Badge>Dibooking</Badge>
@@ -52,6 +60,7 @@ const BadgeWrapper = styled.div`
     width: 100%;
   }
 `;
+
 const GreyBadge = styled.div`
   font-size: 14px;
   color: #535353;
@@ -60,6 +69,9 @@ const GreyBadge = styled.div`
   border-radius: 4px;
   height: fit-content;
   width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   @media screen and (max-width: 768px) {
     width: 100%;
   }

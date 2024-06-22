@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const ButtonPrimary = styled(Button)`
     height: 48px;
-    border-radius: 8px;
+    border-radius: 12px;
     border: unset;
     background-color: #FF0000;
     &.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
@@ -18,7 +18,7 @@ export const ButtonPrimary = styled(Button)`
 `
 export const ButtonSecondary = styled(Button)`
     height: 48px;
-    border-radius: 8px;
+    border-radius: 12px;
     border: 2px solid #FF0000;
     background-color: white;
     &.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {

@@ -6,7 +6,7 @@ import React from "react";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
 
-const SportClasses = ({openModal}) => {
+const SportClasses = ({ openModal }) => {
   return (
     <Wrapper>
       <HeaderWrapper>
@@ -70,20 +70,24 @@ export default SportClasses;
 
 const Wrapper = styled.div`
   padding: 80px;
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
     padding: 24px;
+    .ant-input-affix-wrapper {
+      width: 100%;
+    }
   }
 `;
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 8px;
 `;
 
 const HeaderTextWrapper = styled.div`
   display: grid;
   gap: 16px;
   @media screen and (max-width: 768px) {
-    gap: 8px;
+    gap: 4px;
   }
 `;
 
@@ -94,6 +98,9 @@ const HeaderTitle = styled.div`
   @media screen and (max-width: 768px) {
     font-size: 28px;
   }
+  @media screen and (max-width: 480px) {
+    font-size: 16px;
+  }
 `;
 const HeaderDescription = styled.div`
   font-size: 20px;
@@ -101,5 +108,8 @@ const HeaderDescription = styled.div`
   color: #535353;
   @media screen and (max-width: 768px) {
     font-size: 16px;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
   }
 `;

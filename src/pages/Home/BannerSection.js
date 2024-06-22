@@ -54,6 +54,13 @@ const Banner = styled.div`
 const BumnWrapper = styled.div`
   display: flex;
   justify-content: end;
+  @media screen and (max-width: 768px) {
+    svg {
+      
+    width: 60px;
+    height: auto;
+    }
+  }
 `;
 
 const BannerTextWrapper = styled.div`

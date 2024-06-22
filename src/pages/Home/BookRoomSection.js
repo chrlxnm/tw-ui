@@ -52,8 +52,8 @@ export default BookRoomSection;
 const Wrapper = styled.div`
   margin: 0 80px;
   margin-top: 32px;
-  @media screen and (max-width: 480px) {
-    margin: 12px 24px 12px 24px;
+  @media screen and (max-width: 768px) {
+    margin: 12px 24px;
   }
 `;
 

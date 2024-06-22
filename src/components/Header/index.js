@@ -2,6 +2,7 @@ import { ButtonPrimary, ButtonSecondary } from "components/Button";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import {ReactComponent as Logout} from 'assets/icons/log-out.svg'
 import styled from "styled-components";
 import { useAuth } from "contexts/AuthContext";
 
@@ -68,8 +69,8 @@ const Header = () => {
           <li>
             {" "}
             {user ? (
-              <ButtonSecondary onClick={() => logout()}>
-                Sign Out
+              <ButtonSecondary onClick={() => logout()} icon={<Logout />} iconPosition="end">
+                Logout
               </ButtonSecondary>
             ) : (
               <ButtonPrimary onClick={() => goToPage("/login")}>
