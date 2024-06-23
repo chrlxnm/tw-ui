@@ -1,29 +1,19 @@
 import "./style.css";
 
-import {
-  Carousel as CarouselAntd,
-  Form,
-  Input as InputAntd,
-} from "antd";
+import React, { useState } from "react";
 
 import { ReactComponent as BackIcon } from "../../assets/icons/back-icon.svg";
-import { ButtonPrimary } from "components/Button";
-import React from "react";
+import { Carousel as CarouselAntd } from "antd";
+import LoginPageSection from "./LoginPage";
+import RegisterSection from "./RegisterPage";
 import styled from "styled-components";
-import { useAuth } from "contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [form] = Form.useForm();
+  const [section, setSection] = useState("login");
   const navigate = useNavigate();
   const goToPage = (page) => {
     navigate(page, { replace: true });
-  };
-  const { login } = useAuth();
-
-  const onLogin = (event) => {
-    login(event?.username);
-    navigate("/home", { replace: true });
   };
 
   return (
@@ -31,12 +21,8 @@ const LoginPage = () => {
       <LeftWrapper>
         <Carousel autoplay>
           <div className="grid w-[60%]">
-            <BigTitle>
-              Selamat datang, Rekans!
-            </BigTitle>
-            <Description>
-              Tetap semangat dan selamat bekerja!
-            </Description>
+            <BigTitle>Selamat datang, Rekans!</BigTitle>
+            <Description>Tetap semangat dan selamat bekerja!</Description>
           </div>
           <BigTitle>Mari semangat!</BigTitle>
           <BigTitle>Bekerja</BigTitle>
@@ -47,62 +33,9 @@ const LoginPage = () => {
           <BackIcon className="login-back-icon"></BackIcon>
           <p className="label-back">Kembali</p>
         </div>
-        <LoginWrapper>
-          <LoginContent>
-            <div className="login-header">
-              <p>
-                <span className="title-font">Employe</span>
-                <span className="title-font title-red">Corner</span>
-              </p>
-              <p className="title-font">Login Wellness Portal</p>
-            </div>
-            <Form
-              form={form}
-              name="validateOnly"
-              layout="vertical"
-              autoComplete="off"
-              requiredMark={false}
-              onFinish={onLogin}
-            >
-              <Form.Item
-                name="username"
-                label="Username"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="Masukkan email" />
-              </Form.Item>
-              <Form.Item
-                name="password"
-                label="Password"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="Masukkan password" />
-              </Form.Item>
-              <p className="text-[#FF0000] font-bold mb-[16px]">
-                Lupa password?
-              </p>
-              <Form.Item>
-                <ButtonPrimary htmlType="submit" className="w-full h-[42px]">
-                  Lanjut
-                </ButtonPrimary>
-              </Form.Item>
-            </Form>
-            <div className="flex gap-[4px]">
-              <p className="text-[#1E1E1E] text-[16px]">Belum memiliki akun?</p>
-              <p className="text-[#FF0000] text-[16px] font-semibold cursor-pointer">
-                Register disini
-              </p>
-            </div>
-          </LoginContent>
-        </LoginWrapper>
+        {section === "login" ? (
+          <LoginPageSection toRegister={() => setSection("register")} />
+        ) : <RegisterSection toLogin={() => setSection("login")} />}
       </RightWrapper>
     </Wrapper>
   );
@@ -115,7 +48,7 @@ const LeftWrapper = styled.div`
   background-color: red;
   padding: 48px 48px 24px 24px;
   height: 100vh;
-  .ant-carousel{
+  .ant-carousel {
     margin-left: 4rem;
   }
   @media screen and (max-width: 768px) {
@@ -124,7 +57,7 @@ const LeftWrapper = styled.div`
     padding: 12px;
     height: 300px;
     padding: 24px;
-    .ant-carousel{
+    .ant-carousel {
       margin-left: unset;
     }
   }
@@ -165,27 +98,6 @@ const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     display: grid;
   }
-`;
-
-const LoginWrapper = styled.div`
-  justify-content: center;
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  @media screen and (max-width: 768px) {
-    align-items: start;
-    padding-top: 4rem;
-  }
-`;
-const LoginContent = styled.div`
-  width: 80%;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const Input = styled(InputAntd)`
-  height: 42px;
 `;
 
 const Carousel = styled(CarouselAntd)`

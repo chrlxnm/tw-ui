@@ -1,5 +1,5 @@
 import { ButtonPrimary, ButtonSecondary } from "components/Button";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import {ReactComponent as Logout} from 'assets/icons/log-out.svg'
@@ -11,9 +11,11 @@ const Header = () => {
   const location = useLocation();
   const path = location.pathname.split("/");
   const currentSection = path?.length > 1 ? path[1] : "";
+  const navigate = useNavigate();
 
-  const goToPage = () => {
+  const goToLoginPage = () => {
     setIsToggleOpen(false);
+    navigate("/login", { replace: true });
   };
   const { user, logout } = useAuth();
   const handleToggleOpen = () => {
@@ -45,13 +47,13 @@ const Header = () => {
           </Link>
         </div>
 
-        <NavManu isToggleOpen={isToggleOpen} onClick={goToPage}>
+        <NavManu isToggleOpen={isToggleOpen}>
           <li>
             <Link
               to={"/home"}
               className={`nav-menu-list ${
                 currentSection === "home" && "active"
-              }`}
+              }`} onClick={handleToggleOpen}
             >
               Beranda
             </Link>
@@ -61,7 +63,7 @@ const Header = () => {
               to={"/riwayat"}
               className={`nav-menu-list ${
                 currentSection === "riwayat" && "active"
-              }`}
+              }`} onClick={handleToggleOpen}
             >
               Riwayat
             </Link>
@@ -73,7 +75,7 @@ const Header = () => {
                 Logout
               </ButtonSecondary>
             ) : (
-              <ButtonPrimary onClick={() => goToPage("/login")}>
+              <ButtonPrimary onClick={() => goToLoginPage("/login")}>
                 Masuk
               </ButtonPrimary>
             )}
