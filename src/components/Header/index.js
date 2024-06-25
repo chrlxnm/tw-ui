@@ -2,7 +2,7 @@ import { ButtonPrimary, ButtonSecondary } from "components/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import {ReactComponent as Logout} from 'assets/icons/log-out.svg'
+import { ReactComponent as Logout } from "assets/icons/log-out.svg";
 import styled from "styled-components";
 import { useAuth } from "contexts/AuthContext";
 
@@ -53,7 +53,8 @@ const Header = () => {
               to={"/beranda"}
               className={`nav-menu-list ${
                 currentSection === "beranda" && "active"
-              }`} onClick={handleToggleOpen}
+              }`}
+              onClick={handleToggleOpen}
             >
               Beranda
             </Link>
@@ -63,7 +64,8 @@ const Header = () => {
               to={"/riwayat"}
               className={`nav-menu-list ${
                 currentSection === "riwayat" && "active"
-              }`} onClick={handleToggleOpen}
+              }`}
+              onClick={handleToggleOpen}
             >
               Riwayat
             </Link>
@@ -71,7 +73,11 @@ const Header = () => {
           <li>
             {" "}
             {user ? (
-              <ButtonSecondary onClick={() => logout()} icon={<Logout />} iconPosition="end">
+              <ButtonSecondary
+                onClick={() => logout()}
+                icon={<Logout />}
+                iconPosition="end"
+              >
                 Logout
               </ButtonSecondary>
             ) : (
@@ -98,7 +104,6 @@ const Header = () => {
 };
 
 export default Header;
-
 
 const StyledHeader = styled.header`
   z-index: 99;
@@ -166,16 +171,27 @@ const NavManu = styled.ul`
     padding: 10px 10px;
   }
   @media screen and (max-width: 768px) {
-    display: ${(props) => (props.isToggleOpen ? "block" : "none")};
+    display: ${(props) => (props.isToggleOpen ? "flex" : "none")};
     flex-direction: column;
     align-items: center;
     width: 100%;
     margin-top: 5px;
-    height: 100vh;
+    height: calc(100vh - 62px);
     text-align: center;
+    gap: 8px;
 
     li button {
       width: 100%;
+    }
+
+    li {
+      height: fit-content;
+    }
+
+    li:last-of-type {
+      width: 100%;
+      margin-top: auto;
+      margin-bottom: 2vh;
     }
   }
 `;

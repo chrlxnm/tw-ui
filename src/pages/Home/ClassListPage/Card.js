@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   border-bottom: 1px solid #d8d8d8;
   @media screen and (max-width: 768px) {
     display: grid;
-    gap: 8px;
+    gap: 12px;
     justify-content: unset;
   }
 `;
@@ -55,6 +55,11 @@ const LeftWrapper = styled.div`
 
 const RightWrapper = styled.div`
   display: flex;
+  @media screen and (max-width: 768px) {
+    button {
+      width: 50%;
+    }
+  }
 `;
 
 const ContentWrapper = styled.div`

@@ -88,6 +88,15 @@ export default ClassListPage;
 const Wrapper = styled.div`
   display: grid;
   padding: 24px 80px;
+  @media screen and (max-width: 768px) {
+    display: grid;
+    gap: 8px;
+    justify-content: unset;
+    padding: 16px;
+    .ant-input-affix-wrapper {
+      width: 100%;
+    }
+  }
 `;
 
 const ChipWrapper = styled.div`
