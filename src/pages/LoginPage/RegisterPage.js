@@ -12,13 +12,21 @@ const RegisterSection = ({ toLogin }) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const onNext = (event) => {
     setSection("data");
   };
   const onRegister = (event) => {
     login(event?.name);
-    navigate("/home", { replace: true });
+    navigate("/beranda", { replace: true });
+  };
+
+  const onValuesChange = () => {
+    const hasErrors = form
+      .getFieldsError()
+      .some(({ errors }) => errors.length > 0);
+    setIsDisabled(hasErrors);
   };
 
   return (
@@ -31,7 +39,7 @@ const RegisterSection = ({ toLogin }) => {
           </LogoWrapper>
           <Title>Register Wellness Portal</Title>
         </div>
-        <Capsule />
+        <Capsule section={section} />
         {section === "email" ? (
           <Form
             form={form}
@@ -40,6 +48,7 @@ const RegisterSection = ({ toLogin }) => {
             autoComplete="off"
             requiredMark={false}
             onFinish={onNext}
+            onFieldsChange={onValuesChange}
           >
             <Form.Item
               name="email"
@@ -47,6 +56,7 @@ const RegisterSection = ({ toLogin }) => {
               rules={[
                 {
                   required: true,
+                  message: "",
                 },
               ]}
             >
@@ -58,13 +68,18 @@ const RegisterSection = ({ toLogin }) => {
               rules={[
                 {
                   required: true,
+                  message: "",
                 },
               ]}
             >
               <Input placeholder="Masukkan password" />
             </Form.Item>
             <Form.Item>
-              <ButtonPrimary htmlType="submit" className="w-full h-[42px]">
+              <ButtonPrimary
+                htmlType="submit"
+                className="w-full h-[42px]"
+                disabled={isDisabled}
+              >
                 Lanjut
               </ButtonPrimary>
             </Form.Item>
@@ -84,6 +99,7 @@ const RegisterSection = ({ toLogin }) => {
               rules={[
                 {
                   required: true,
+                  message: "",
                 },
               ]}
             >
@@ -95,6 +111,7 @@ const RegisterSection = ({ toLogin }) => {
               rules={[
                 {
                   required: true,
+                  message: "",
                 },
               ]}
             >
@@ -106,6 +123,7 @@ const RegisterSection = ({ toLogin }) => {
               rules={[
                 {
                   required: true,
+                  message: "",
                 },
               ]}
             >

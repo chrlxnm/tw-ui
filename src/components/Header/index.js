@@ -50,9 +50,9 @@ const Header = () => {
         <NavManu isToggleOpen={isToggleOpen}>
           <li>
             <Link
-              to={"/home"}
+              to={"/beranda"}
               className={`nav-menu-list ${
-                currentSection === "home" && "active"
+                currentSection === "beranda" && "active"
               }`} onClick={handleToggleOpen}
             >
               Beranda

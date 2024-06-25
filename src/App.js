@@ -2,6 +2,7 @@ import "./App.css";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 
+import ClassListPage from "pages/Home/ClassListPage";
 import History from "pages/History";
 import Home from "pages/Home";
 import Layout from "components/Layout";
@@ -14,8 +15,9 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Home />} />
+        <Route index element={<Navigate to="/beranda" />} />
+        <Route path="/beranda" element={<Home />} />
+        <Route path="/beranda/daftar-kelas" element={<ClassListPage />} />
         <Route
           path="/riwayat"
           element={

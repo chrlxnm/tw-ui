@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const Capsule = () => {
+const Capsule = ({ section }) => {
   return (
     <Wrapper>
-      <Item className="left" active>
-        <Circle active>1</Circle>
-        <Title active>Email</Title>
+      <Item className="left" active={section === "email"}>
+        <Circle active={section === "email"}>1</Circle>
+        <Title active={section === "email"}>Email</Title>
       </Item>
-      <Item className="right">
-        <Circle>2</Circle>
-        <Title>Data Diri</Title>
+      <Item className="right" active={section === "data"}>
+        <Circle active={section === "data"}>2</Circle>
+        <Title active={section === "data"}>Data Diri</Title>
       </Item>
     </Wrapper>
   );

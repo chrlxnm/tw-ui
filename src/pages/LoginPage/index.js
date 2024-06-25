@@ -29,7 +29,7 @@ const LoginPage = () => {
         </Carousel>
       </LeftWrapper>
       <RightWrapper>
-        <div className="space" onClick={() => goToPage("/home")}>
+        <div className="space" onClick={() => goToPage("/beranda")}>
           <BackIcon className="login-back-icon"></BackIcon>
           <p className="label-back">Kembali</p>
         </div>

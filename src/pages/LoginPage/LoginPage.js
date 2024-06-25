@@ -1,7 +1,7 @@
 import { Form, Input as InputAntd } from "antd";
+import React, { useState } from "react";
 
 import { ButtonPrimary } from "components/Button";
-import React from "react";
 import styled from "styled-components";
 import { useAuth } from "contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -10,12 +10,20 @@ const LoginPageSection = ({ toRegister }) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const onLogin = (event) => {
     login(event?.username);
-    navigate("/home", { replace: true });
+    navigate("/beranda", { replace: true });
   };
 
+  const onValuesChange = () => {
+    const hasErrors = form
+      .getFieldsError()
+      .some(({ errors }) => errors.length > 0);
+    setIsDisabled(hasErrors);
+  };
+  
   return (
     <LoginWrapper>
       <LoginContent>
@@ -33,6 +41,7 @@ const LoginPageSection = ({ toRegister }) => {
           autoComplete="off"
           requiredMark={false}
           onFinish={onLogin}
+          onFieldsChange={onValuesChange}
         >
           <Form.Item
             name="username"
@@ -40,6 +49,7 @@ const LoginPageSection = ({ toRegister }) => {
             rules={[
               {
                 required: true,
+                message: "",
               },
             ]}
           >
@@ -51,6 +61,7 @@ const LoginPageSection = ({ toRegister }) => {
             rules={[
               {
                 required: true,
+                message: "",
               },
             ]}
           >
@@ -58,7 +69,11 @@ const LoginPageSection = ({ toRegister }) => {
           </Form.Item>
           <p className="text-[#FF0000] font-bold mb-[16px]">Lupa password?</p>
           <Form.Item>
-            <ButtonPrimary htmlType="submit" className="w-full h-[42px]">
+            <ButtonPrimary
+              htmlType="submit"
+              className="w-full h-[42px]"
+              disabled={isDisabled}
+            >
               Lanjut
             </ButtonPrimary>
           </Form.Item>

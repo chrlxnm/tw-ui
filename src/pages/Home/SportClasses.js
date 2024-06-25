@@ -5,8 +5,13 @@ import ClassCard from "components/ClassCard";
 import React from "react";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const SportClasses = ({ openModal }) => {
+  const navigate = useNavigate();
+  const goToPage = (page) => {
+    navigate(page, { replace: true });
+  };
   return (
     <Wrapper>
       <HeaderWrapper>
@@ -16,7 +21,7 @@ const SportClasses = ({ openModal }) => {
             Pilihan sport classes yang dapat membantu hidup sehat
           </HeaderDescription>
         </HeaderTextWrapper>
-        <ButtonSecondary className="w-fit">Lihat semua</ButtonSecondary>
+        <ButtonSecondary className="w-fit" onClick={()=> goToPage("/beranda/daftar-kelas")}>Lihat semua</ButtonSecondary>
       </HeaderWrapper>
       <Input
         className="my-[16px] w-[40%]"
