@@ -191,7 +191,7 @@ const NavManu = styled.ul`
     li:last-of-type {
       width: 100%;
       margin-top: auto;
-      margin-bottom: 2vh;
+      margin-bottom: 10vh;
     }
   }
 `;
