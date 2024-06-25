@@ -4,12 +4,12 @@ import React from "react";
 import RoomCard from "components/RoomCard/RoomCard";
 import styled from "styled-components";
 
-const BookRoomSection = () => {
+const BookRoomSection = ({openModal}) => {
   return (
     <Wrapper>
       <Title>Booking Ruangan</Title>
       <Row gutter={[16, 16]}>
-        <Col xs={24} sm={24} md={8} lg={6} xl={4}>
+        <Col xs={24} sm={24} md={8} lg={6} xl={4} onClick={openModal} >
           <RoomCard />
         </Col>
         <Col xs={24} sm={24} md={8} lg={6} xl={4}>

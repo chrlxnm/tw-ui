@@ -1,14 +1,16 @@
-import { Form, Modal as ModalAntd } from "antd";
+import { Form, Modal as ModalAntd, Select as SelectAntd } from "antd";
 
+import AlertBanner from "./Alert";
 import { ButtonPrimary } from "components/Button";
-import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import { Input } from "components/Input";
 import React from "react";
+import { ReactComponent as Speaker } from "assets/icons/speaker.svg";
+import { ReactComponent as TV } from "assets/icons/tv.svg";
 import { ReactComponent as Users } from "assets/icons/users.svg";
 import poundFit from "../../assets/images/poundfit-image.png";
 import styled from "styled-components";
 
-const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
+const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [form] = Form.useForm();
 
   const onFinish = () => {
@@ -16,15 +18,15 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
     setAlert({
       ...alert,
       visible: true,
-      message: 'Pendaftaran kelas poundfit berhasil'
-    })
-  }
+      message: "Pendaftaran ruangan billiard berhasil",
+    });
+  };
 
   const closeModal = () => {
     onClose();
     form.resetFields();
-  }
-  
+  };
+
   return (
     <Modal
       title="Form Pendaftaran Kelas"
@@ -35,18 +37,22 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
       <Wrapper>
         <LeftSide>
           <Image alt="photo" src={poundFit} />
-          <Date>Senin, 20 Mei 2024</Date>
-          <Title>Poundfit</Title>
+          <Title>Ruangan Karaoke</Title>
           <BadgeWrapper>
             <GreyBadge>
               <Users />
               Kuota 20 orang
             </GreyBadge>
             <GreyBadge>
-              <Clock />
-              16.00-17.00
+              <TV />
+              TV
+            </GreyBadge>
+            <GreyBadge>
+              <Speaker />
+              Sound
             </GreyBadge>
           </BadgeWrapper>
+          <AlertBanner />
         </LeftSide>
         <RightSide>
           <Form
@@ -64,7 +70,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
               rules={[
                 {
                   required: true,
-                  message: ''
+                  message: "",
                 },
               ]}
             >
@@ -76,7 +82,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
               rules={[
                 {
                   required: true,
-                  message: ''
+                  message: "",
                 },
               ]}
             >
@@ -88,23 +94,74 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
               rules={[
                 {
                   required: true,
-                  message: ''
+                  message: "",
                 },
               ]}
             >
               <Input placeholder="Masukkan Unit/Divisi" />
             </Form.Item>
             <Form.Item
-              label="No. HP"
-              name="phoneNo"
+              label="Tanggal Penggunaan"
+              name="date"
               rules={[
                 {
                   required: true,
-                  message: ''
+                  message: "",
                 },
               ]}
             >
               <Input placeholder="Masukkan No. HP" />
+            </Form.Item>
+            <Form.Item
+              label="Waktu Mulai"
+              name="time"
+              rules={[
+                {
+                  required: true,
+                  message: "",
+                },
+              ]}
+            >
+              <Select
+                size="large"
+                placeholder="Pilih waktu mulai"
+                options={[
+                  { value: "11:00", label: "11:00" },
+                  { value: "12:00", label: "12:00" },
+                  { value: "13:00", label: "13:00" },
+                  { value: "14:00", label: "14:00", disabled: true },
+                ]}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Pilih Durasi"
+              name="duration"
+              rules={[
+                {
+                  required: true,
+                  message: "",
+                },
+              ]}
+            >
+              <Select size="large" placeholder="Pilih waktu durasi" 
+                options={[
+                  { value: "1 Jam", label: "1 Jam" },
+                  { value: "2 Jam", label: "2 Jam" },
+                  { value: "3 Jam", label: "3 Jam" },
+                  { value: "4 Jam", label: "4 Jam", disabled: true },
+                ]}/>
+            </Form.Item>
+            <Form.Item
+              label="Jumlah Peserta"
+              name="total"
+              rules={[
+                {
+                  required: true,
+                  message: "",
+                },
+              ]}
+            >
+              <Input placeholder="Masukkan jumlah peserta disini" />
             </Form.Item>
             <Form.Item>
               <ButtonPrimary htmlType="submit" className="w-full h-[42px]">
@@ -118,7 +175,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
   );
 };
 
-export default ClassModal;
+export default RoomModal;
 
 const Wrapper = styled.div`
   display: flex;
@@ -130,10 +187,13 @@ const Wrapper = styled.div`
 const BadgeWrapper = styled.div`
   display: flex;
   gap: 12px;
+  margin-bottom: 12px;
   @media screen and (max-width: 768px) {
     width: 100%;
   }
 `;
+
+const Select = styled(SelectAntd)``;
 
 const GreyBadge = styled.div`
   font-size: 14px;
@@ -177,23 +237,30 @@ const Title = styled.p`
   margin-bottom: 16px;
 `;
 
-const Date = styled.p`
-  font-weight: 400;
-  font-size: 14px;
-  color: #1e1e1e;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-`;
-
 const Modal = styled(ModalAntd)`
   .ant-modal-footer {
     display: none !important;
   }
+  .ant-modal-body {
+    overflow: auto;
+    max-height: calc(90vh - 72px);
+  }
+
+  &.ant-modal-wrap {
+    overflow: unset !important;
+  }
+
   .ant-modal-content {
     width: 60vw;
+    max-height: 90vh;
   }
   &.ant-modal {
     width: 60vw !important;
+    top: 5vh;
+    max-height: 90vh;
+  }
+  .ant-modal-header {
+    margin-bottom: 16px;
   }
 
   @media screen and (max-width: 768px) {
