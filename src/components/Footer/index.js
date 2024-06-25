@@ -8,21 +8,31 @@ import { ReactComponent as TwLogo } from "assets/icons/tw-white-icons.svg";
 import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
 import { ReactComponent as YoutubeIcon } from "assets/icons/youtube.svg";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const goToPage = (page) => {
+    navigate(page, { replace: true });
+  };
   return (
     <Wrapper>
       <MenuWrapper>
         <TwLogo className="logo" />
         <MenuItemWrapper>
           <MenuItem>
-            <MenuHeader>Beranda</MenuHeader>
+            <MenuHeader onClick={() => goToPage("/beranda")}>
+              Beranda
+            </MenuHeader>
             <p>Sport Class</p>
             <p>Booking Ruangan</p>
           </MenuItem>
           <MenuItem>
-            <MenuHeader>History</MenuHeader>
-            <p>Cek History</p>
+            <MenuHeader onClick={() => goToPage("/riwayat")}>
+              History
+            </MenuHeader>
+            <p onClick={() => goToPage("/riwayat")}>Cek History</p>
           </MenuItem>
         </MenuItemWrapper>
         <MenuItem>
