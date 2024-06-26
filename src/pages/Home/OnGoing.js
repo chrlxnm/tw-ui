@@ -27,6 +27,10 @@ const Wrapper = styled.div`
   button {
     min-width: 20%;
   }
+  
+  @media screen and (max-width: 768px) {
+    margin: 24px;
+  }
 `;
 
 const LeftWrapper = styled.div`
