@@ -1,14 +1,23 @@
 import { Form, Modal as ModalAntd } from "antd";
+import React, { useEffect } from "react";
 
 import { ButtonPrimary } from "components/Button";
 import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import { Input } from "components/Input";
-import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
 
 const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue({
+      name: "Teddy Krisna",
+      nik: "1927378021",
+      unit: "IT Development",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onFinish = () => {
     closeModal();

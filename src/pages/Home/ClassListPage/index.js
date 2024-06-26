@@ -6,8 +6,10 @@ import BookRoomBanner from "./RoomBanner";
 import Card from "./Card";
 import Chip from "components/Chip/Chip";
 import { ClassData } from "constant/dummyData";
+import ClassModal from "components/ClassModal";
 import { Input } from "components/Input";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
+import TWAlert from "components/Alert";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -17,8 +19,44 @@ const ClassListPage = () => {
   const goToPage = (page) => {
     navigate(page, { replace: true });
   };
+
+  const [dataClassModal, setDataClassModal] = useState({
+    visible: false,
+    data: undefined,
+  });
+
+  const openClassModal = (data) => {
+    setDataClassModal({
+      ...dataClassModal,
+      visible: true,
+      data: data,
+    });
+  };
+
+  const [alert, setAlert] = useState({
+    message: "",
+    visible: false,
+  });
+
   return (
     <Wrapper>
+      <TWAlert
+        visible={alert?.visible}
+        message={alert?.message}
+        onClose={() =>
+          setAlert({
+            ...alert,
+            visible: false,
+          })
+        }
+      />
+      <ClassModal
+        alert={alert}
+        setAlert={setAlert}
+        visible={dataClassModal?.visible}
+        data={dataClassModal?.data}
+        onClose={() => setDataClassModal({ ...dataClassModal, visible: false })}
+      />
       <BackWrapper onClick={() => goToPage("/beranda")}>
         <BackIcon className="login-back-icon"></BackIcon>
         <p className="label-back">Kembali</p>
@@ -31,7 +69,7 @@ const ClassListPage = () => {
         </HeaderDescription>
       </HeaderTextWrapper>
       <Input
-        className="my-[16px] w-[40%] sm:w-full"
+        className="my-[16px] w-[40%] search-input"
         size="large"
         placeholder="Cari sport class disini . . ."
         prefix={<SearchIcon />}
@@ -66,7 +104,7 @@ const ClassListPage = () => {
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={16} xl={16} xxl={16}>
           {ClassData?.map((item) => (
-            <Card data={item} />
+            <Card data={item} openModal={() => openClassModal(item)} />
           ))}
         </Col>
         <Col xs={24} sm={24} md={24} lg={8} xl={8} xxl={8}>
@@ -88,6 +126,10 @@ const Wrapper = styled.div`
     justify-content: unset;
     padding: 16px;
     .ant-input-affix-wrapper {
+      width: 100%;
+    }
+
+    .search-input {
       width: 100%;
     }
   }

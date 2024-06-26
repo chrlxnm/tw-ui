@@ -4,7 +4,7 @@ import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
 
-const Card = ({ data }) => {
+const Card = ({ data, openModal }) => {
   return (
     <Wrapper>
       <LeftWrapper>
@@ -30,7 +30,7 @@ const Card = ({ data }) => {
         </BadgeWrapper>
       </LeftWrapper>
       <RightWrapper>
-        <ButtonPrimary>Join Class</ButtonPrimary>
+        <ButtonPrimary onClick={openModal}>Join Class</ButtonPrimary>
       </RightWrapper>
     </Wrapper>
   );
