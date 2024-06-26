@@ -4,51 +4,75 @@ import { BandIcon, BilliardIcon, BriefingIcon, ChairIcon, ExcerciseIcon, Fussbal
 export const RoomData = [
     {
         title: "Band",
-        icon: BandIcon
+        icon: BandIcon,
+        kuota: 20,
+        img: ModernDance
     },
     {
         title: "Ruang Karaoke",
-        icon: KaraokeIcon
+        icon: KaraokeIcon,
+        kuota: 20,
+        img: Aikido
     },
     {
         title: "Area Panggung",
-        icon: StageIcon
+        icon: StageIcon,
+        kuota: 20,
+        img: BasicYoga
     },
     {
         title: "Ruang TSO",
-        icon: TelephoneIcon
+        icon: TelephoneIcon,
+        kuota: 20,
+        img: Poundfit
     },
     {
         title: "Ruang Senam",
-        icon: ExcerciseIcon
+        icon: ExcerciseIcon,
+        kuota: 20,
+        img: BasicYoga
     },
     {
         title: "Ruang Smart Talk",
-        icon: WorkshopIcon
+        icon: WorkshopIcon,
+        kuota: 20,
+        img: Aikido
     },
     {
         title: "Ruang 1 on 1",
-        icon: BriefingIcon
+        icon: BriefingIcon,
+        kuota: 20,
+        img: ModernDance
     },
     {
         title: "Tenis Meja",
-        icon: PingPongIcon
+        icon: PingPongIcon,
+        kuota: 20,
+        img: Aikido
     },
     {
         title: "Golf",
-        icon: GolfIcon
+        icon: GolfIcon,
+        kuota: 20,
+        img: Aikido
     },
     {
         title: "Billiard",
-        icon: BilliardIcon
+        icon: BilliardIcon,
+        kuota: 20,
+        img: Aikido
     },
     {
         title: "Kursi Pijat",
-        icon: ChairIcon
+        icon: ChairIcon,
+        kuota: 20,
+        img: Aikido
     },
     {
         title: "Fussball",
-        icon: FussballIcon
+        icon: FussballIcon,
+        kuota: 20,
+        img: Aikido
     },
 ]
 

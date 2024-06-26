@@ -36,12 +36,12 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
     >
       <Wrapper>
         <LeftSide>
-          <Image alt="photo" src={poundFit} />
-          <Title>Ruangan Karaoke</Title>
+          <Image alt="photo" src={data?.img} />
+          <Title>{data?.title}</Title>
           <BadgeWrapper>
             <GreyBadge>
               <Users />
-              Kuota 20 orang
+              Kuota {data?.kuota} orang
             </GreyBadge>
             <GreyBadge>
               <TV />
@@ -62,7 +62,6 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
             autoComplete="off"
             requiredMark={false}
             onFinish={onFinish}
-            //   onFinish={onLogin}
           >
             <Form.Item
               label="Nama"

@@ -11,7 +11,14 @@ const BookRoomSection = ({ openModal }) => {
       <Title>Booking Ruangan</Title>
       <Row gutter={[16, 16]}>
         {RoomData.map((item) => (
-          <Col xs={24} sm={24} md={8} lg={6} xl={4} onClick={openModal}>
+          <Col
+            xs={24}
+            sm={24}
+            md={8}
+            lg={6}
+            xl={4}
+            onClick={() => openModal(item)}
+          >
             <RoomCard data={item} />
           </Col>
         ))}

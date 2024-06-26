@@ -22,7 +22,7 @@ const ClassCard = ({ openModal, data }) => {
           </Badge>
         </BadgeWrapper>
         <JoinedText>{data?.registered} orang sudah mendaftar</JoinedText>
-        <ButtonPrimary onClick={() => openModal()}>Join Class</ButtonPrimary>
+        <ButtonPrimary onClick={() => openModal(data)}>Join Class</ButtonPrimary>
       </ContentWrapper>
     </Wrapper>
   );

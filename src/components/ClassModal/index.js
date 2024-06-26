@@ -5,7 +5,6 @@ import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import { Input } from "components/Input";
 import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
-import poundFit from "../../assets/images/poundfit-image.png";
 import styled from "styled-components";
 
 const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
@@ -16,15 +15,15 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
     setAlert({
       ...alert,
       visible: true,
-      message: 'Pendaftaran kelas poundfit berhasil'
-    })
-  }
+      message: "Pendaftaran kelas poundfit berhasil",
+    });
+  };
 
   const closeModal = () => {
     onClose();
     form.resetFields();
-  }
-  
+  };
+
   return (
     <Modal
       title="Form Pendaftaran Kelas"
@@ -34,17 +33,17 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
     >
       <Wrapper>
         <LeftSide>
-          <Image alt="photo" src={poundFit} />
-          <Date>Senin, 20 Mei 2024</Date>
-          <Title>Poundfit</Title>
+          <Image alt="photo" src={data?.img} />
+          <Date>{data?.date}</Date>
+          <Title>{data?.title}</Title>
           <BadgeWrapper>
             <GreyBadge>
               <Users />
-              Kuota 20 orang
+              Kuota {data?.kuota} orang
             </GreyBadge>
             <GreyBadge>
               <Clock />
-              16.00-17.00
+              {data?.time}
             </GreyBadge>
           </BadgeWrapper>
         </LeftSide>
@@ -56,7 +55,6 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
             autoComplete="off"
             requiredMark={false}
             onFinish={onFinish}
-            //   onFinish={onLogin}
           >
             <Form.Item
               label="Nama"
@@ -64,7 +62,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
               rules={[
                 {
                   required: true,
-                  message: ''
+                  message: "",
                 },
               ]}
             >
@@ -76,7 +74,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
               rules={[
                 {
                   required: true,
-                  message: ''
+                  message: "",
                 },
               ]}
             >
@@ -88,7 +86,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
               rules={[
                 {
                   required: true,
-                  message: ''
+                  message: "",
                 },
               ]}
             >
@@ -100,7 +98,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
               rules={[
                 {
                   required: true,
-                  message: ''
+                  message: "",
                 },
               ]}
             >

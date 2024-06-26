@@ -12,9 +12,30 @@ import TWAlert from "components/Alert";
 import styled from "styled-components";
 
 const Home = () => {
-  const [visible, setVisible] = useState(false);
-  const [visibleRoom, setVisibleRoom] = useState(false);
-  const [dataRoom, setDataRoom] = useState();
+  const [dataClassModal, setDataClassModal] = useState({
+    visible: false,
+    data: undefined,
+  });
+  const [dataRoomModal, setDataRoomModal] = useState({
+    visible: false,
+    data: undefined,
+  });
+
+  const openClassModal = (data) => {
+    setDataClassModal({
+      ...dataClassModal,
+      visible: true,
+      data: data,
+    });
+  };
+  const openRoomModal = (data) => {
+    setDataRoomModal({
+      ...dataRoomModal,
+      visible: true,
+      data: data,
+    });
+  };
+
   const [alert, setAlert] = useState({
     message: "",
     visible: false,
@@ -32,12 +53,24 @@ const Home = () => {
           })
         }
       />
-      <ClassModal alert={alert} setAlert={setAlert} visible={visible} onClose={() => setVisible(false)} />
-      <RoomModal alert={alert} setAlert={setAlert} visible={visibleRoom} onClose={() => setVisibleRoom(false)} />
+      <ClassModal
+        alert={alert}
+        setAlert={setAlert}
+        visible={dataClassModal?.visible}
+        data={dataClassModal?.data}
+        onClose={() => setDataClassModal({ ...dataClassModal, visible: false })}
+      />
+      <RoomModal
+        alert={alert}
+        setAlert={setAlert}
+        visible={dataRoomModal?.visible}
+        data={dataRoomModal?.data}
+        onClose={() => setDataRoomModal({ ...dataRoomModal, visible: false })}
+      />
       <BannerSection />
-      <SportClasses openModal={() => setVisible(true)} />
+      <SportClasses openModal={openClassModal} />
       <BookRoomBanner />
-      <BookRoomSection openModal={() => setVisibleRoom(true)} />
+      <BookRoomSection openModal={openRoomModal} />
     </HomeWrapper>
   );
 };
