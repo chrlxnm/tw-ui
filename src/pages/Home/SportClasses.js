@@ -2,6 +2,7 @@ import { Col, Input, Row } from "antd";
 
 import { ButtonSecondary } from "components/Button";
 import ClassCard from "components/ClassCard";
+import { ClassData } from "constant/dummyData";
 import React from "react";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
@@ -21,7 +22,12 @@ const SportClasses = ({ openModal }) => {
             Pilihan sport classes yang dapat membantu hidup sehat
           </HeaderDescription>
         </HeaderTextWrapper>
-        <ButtonSecondary className="w-fit" onClick={()=> goToPage("/beranda/daftar-kelas")}>Lihat semua</ButtonSecondary>
+        <ButtonSecondary
+          className="w-fit"
+          onClick={() => goToPage("/beranda/daftar-kelas")}
+        >
+          Lihat semua
+        </ButtonSecondary>
       </HeaderWrapper>
       <Input
         className="my-[16px] w-[40%]"
@@ -30,42 +36,11 @@ const SportClasses = ({ openModal }) => {
         prefix={<SearchIcon />}
       />
       <Row gutter={[16, 16]}>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
-        <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-          <ClassCard openModal={openModal} />
-        </Col>
+        {ClassData.map((item) => (
+          <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
+            <ClassCard data={item} openModal={openModal} />
+          </Col>
+        ))}
       </Row>
     </Wrapper>
   );

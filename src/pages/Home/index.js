@@ -14,6 +14,7 @@ import styled from "styled-components";
 const Home = () => {
   const [visible, setVisible] = useState(false);
   const [visibleRoom, setVisibleRoom] = useState(false);
+  const [dataRoom, setDataRoom] = useState();
   const [alert, setAlert] = useState({
     message: "",
     visible: false,

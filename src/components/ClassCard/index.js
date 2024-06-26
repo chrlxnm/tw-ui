@@ -1,21 +1,28 @@
 import { ButtonPrimary } from "components/Button";
+import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import React from "react";
-import poundFit from "../../assets/images/poundfit-image.png";
+import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
 
-const ClassCard = ({openModal}) => {
+const ClassCard = ({ openModal, data }) => {
   return (
     <Wrapper>
-      <Image alt="image" src={poundFit} />
+      <Image alt="image" src={data?.img} />
       <ContentWrapper>
-        <TextDate>Senin, 20 Mei 2024</TextDate>
-        <TextTitle>Poundfit</TextTitle>
+        <TextDate>{data?.date}</TextDate>
+        <TextTitle>{data?.title}</TextTitle>
         <BadgeWrapper>
-          <Badge>TES</Badge>
-          <Badge>TES</Badge>
+          <Badge>
+            <Users />
+            Kuota {data?.kuota} orang
+          </Badge>
+          <Badge>
+            <Clock />
+            {data?.time}
+          </Badge>
         </BadgeWrapper>
-        <JoinedText>25 orang sudah mendaftar</JoinedText>
-        <ButtonPrimary onClick={()=> openModal()}>Join Class</ButtonPrimary>
+        <JoinedText>{data?.registered} orang sudah mendaftar</JoinedText>
+        <ButtonPrimary onClick={() => openModal()}>Join Class</ButtonPrimary>
       </ContentWrapper>
     </Wrapper>
   );
@@ -44,6 +51,11 @@ const Image = styled.img`
   object-fit: cover;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+
+  @media screen and (max-width: 768px) {
+    aspect-ratio: 7/4;
+    height: auto;
+  }
 `;
 
 const TextDate = styled.p`
@@ -72,6 +84,7 @@ const Badge = styled.div`
   gap: 8px;
   border-radius: 8px;
   background: #f2f2f2;
+  color: #535353;
 `;
 
 const JoinedText = styled.p`

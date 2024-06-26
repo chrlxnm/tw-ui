@@ -4,26 +4,28 @@ import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
 
-const Card = ({ image, title, date, joined, quota, time }) => {
+const Card = ({ data }) => {
   return (
     <Wrapper>
       <LeftWrapper>
         <ContentWrapper>
-          <Image src={image} alt="photo" />
+          <Image src={data?.img} alt="photo" />
           <TitleWrapper>
-            <Date>{date || "-"}</Date>
-            <Title>{title || "-"}</Title>
-            <JoinedDesc>{joined || "0"} orang sudah mendaftar</JoinedDesc>
+            <Date>{data?.date || "-"}</Date>
+            <Title>{data?.title || "-"}</Title>
+            <JoinedDesc>
+              {data?.registered || "0"} orang sudah mendaftar
+            </JoinedDesc>
           </TitleWrapper>
         </ContentWrapper>
         <BadgeWrapper>
           <GreyBadge>
             <Users />
-            Kuota {quota || "0"} orang
+            Kuota {data?.kuota || "0"} orang
           </GreyBadge>
           <GreyBadge>
             <Clock />
-            {time || "-"}
+            {data?.time || "-"}
           </GreyBadge>
         </BadgeWrapper>
       </LeftWrapper>

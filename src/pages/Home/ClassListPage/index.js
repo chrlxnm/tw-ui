@@ -5,6 +5,7 @@ import { ReactComponent as BackIcon } from "../../../assets/icons/back-icon.svg"
 import BookRoomBanner from "./RoomBanner";
 import Card from "./Card";
 import Chip from "components/Chip/Chip";
+import { ClassData } from "constant/dummyData";
 import { Input } from "components/Input";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
@@ -64,16 +65,9 @@ const ClassListPage = () => {
       </ChipWrapper>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={16} xl={16} xxl={16}>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {ClassData?.map((item) => (
+            <Card data={item} />
+          ))}
         </Col>
         <Col xs={24} sm={24} md={24} lg={8} xl={8} xxl={8}>
           <BookRoomBanner />

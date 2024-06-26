@@ -29,7 +29,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
 
   return (
     <Modal
-      title="Form Pendaftaran Kelas"
+      title="Form Pendaftaran Ruangan"
       open={visible}
       onOk={closeModal}
       onCancel={closeModal}
@@ -273,9 +273,11 @@ const Modal = styled(ModalAntd)`
       padding: 0;
       width: 100vw !important;
       max-width: unset;
+      max-height: 100vh;
     }
     .ant-modal-content {
       height: 100vh;
+      max-height: 100vh;
       width: 100vw;
     }
     .ant-modal-body {

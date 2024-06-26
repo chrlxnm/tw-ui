@@ -1,13 +1,12 @@
-import {ReactComponent as Icons} from 'assets/icons/instruments.svg'
 import React from 'react'
 import styled from 'styled-components';
 
-const RoomCard = () => {
+const RoomCard = ({data}) => {
   return (
     <Wrapper>
-        <Icons />
+      <img src={data?.icon} alt='icon' />
         <Title>
-        Band
+        {data?.title}
         </Title>
     </Wrapper>
   )
