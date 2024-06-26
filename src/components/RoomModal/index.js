@@ -1,4 +1,9 @@
-import { Form, Modal as ModalAntd, Select as SelectAntd } from "antd";
+import {
+  DatePicker,
+  Form,
+  Modal as ModalAntd,
+  Select as SelectAntd,
+} from "antd";
 
 import AlertBanner from "./Alert";
 import { ButtonPrimary } from "components/Button";
@@ -109,7 +114,11 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
                 },
               ]}
             >
-              <Input placeholder="Masukkan No. HP" />
+              <DatePicker
+                placeholder="Pilih tanggal pemesanan"
+                size="large"
+                style={{ width: "100%" }}
+              />
             </Form.Item>
             <Form.Item
               label="Waktu Mulai"
@@ -142,13 +151,16 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
                 },
               ]}
             >
-              <Select size="large" placeholder="Pilih waktu durasi" 
+              <Select
+                size="large"
+                placeholder="Pilih waktu durasi"
                 options={[
                   { value: "1 Jam", label: "1 Jam" },
                   { value: "2 Jam", label: "2 Jam" },
                   { value: "3 Jam", label: "3 Jam" },
                   { value: "4 Jam", label: "4 Jam", disabled: true },
-                ]}/>
+                ]}
+              />
             </Form.Item>
             <Form.Item
               label="Jumlah Peserta"
@@ -160,7 +172,14 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
                 },
               ]}
             >
-              <Input placeholder="Masukkan jumlah peserta disini" />
+              <Input
+                placeholder="Masukkan jumlah peserta disini"
+                onKeyPress={(event) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
+              />
             </Form.Item>
             <Form.Item>
               <ButtonPrimary htmlType="submit" className="w-full h-[42px]">
