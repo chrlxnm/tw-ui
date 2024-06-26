@@ -6,12 +6,14 @@ import BannerSection from "./BannerSection";
 import BookRoomBanner from "./BookRoomBanner";
 import BookRoomSection from "./BookRoomSection";
 import ClassModal from "components/ClassModal";
+import OnGoing from "./OnGoing";
 import RoomModal from "components/RoomModal";
 import SportClasses from "./SportClasses";
 import TWAlert from "components/Alert";
 import styled from "styled-components";
 
 const Home = () => {
+  const isAuthenticated = localStorage.getItem("authToken");
   const [dataClassModal, setDataClassModal] = useState({
     visible: false,
     data: undefined,
@@ -68,6 +70,7 @@ const Home = () => {
         onClose={() => setDataRoomModal({ ...dataRoomModal, visible: false })}
       />
       <BannerSection />
+      {isAuthenticated && <OnGoing />}
       <SportClasses openModal={openClassModal} />
       <BookRoomBanner />
       <BookRoomSection openModal={openRoomModal} />
