@@ -4,7 +4,7 @@ import { ReactComponent as FacebookIcon } from "assets/icons/facebook.svg";
 import { ReactComponent as InstagramIcon } from "assets/icons/instagram.svg";
 import { ReactComponent as LinkedinIcon } from "assets/icons/linkedin.svg";
 import React from "react";
-import { ReactComponent as TwLogo } from "assets/icons/tw-white-icons.svg";
+import { ReactComponent as TwLogo } from "assets/icons/employee-corner-dark.svg";
 import { ReactComponent as TwitterIcon } from "assets/icons/twitter.svg";
 import { ReactComponent as YoutubeIcon } from "assets/icons/youtube.svg";
 import styled from "styled-components";
