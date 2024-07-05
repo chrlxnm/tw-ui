@@ -25,8 +25,8 @@ const Footer = () => {
             <MenuHeader onClick={() => goToPage("/beranda")}>
               Beranda
             </MenuHeader>
-            <p>Sport Class</p>
-            <p>Booking Ruangan</p>
+            <p onClick={() => goToPage("/beranda#class")}>Sport Class</p>
+            <p onClick={() => goToPage("/beranda#room")}>Booking Ruangan</p>
           </MenuItem>
           <MenuItem>
             <MenuHeader onClick={() => goToPage("/riwayat")}>
@@ -104,9 +104,12 @@ const MenuItemWrapper = styled.div`
 
 const MenuItem = styled.div`
   display: block;
+  p {
+    cursor: pointer;
+  }
 `;
 
-const MenuHeader = styled.div`
+const MenuHeader = styled.p`
   font-weight: 600;
   margin-bottom: 24px;
   cursor: unset;

@@ -12,6 +12,7 @@ const Chip = ({ active, label, onClick }) => {
 export default Chip;
 
 const Wrapper = styled.div`
+  cursor: pointer;
   padding: 10px 16px 10px 16px;
   border: ${(props) =>
     props.active ? "2px solid #FF0000" : "2px solid #00000033"};

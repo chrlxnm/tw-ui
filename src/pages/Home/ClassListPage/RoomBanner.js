@@ -2,8 +2,14 @@ import BannerBG from "../../../assets/images/book-room-img.svg";
 import { ButtonPrimary } from "components/Button";
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const BookRoomBanner = () => {
+  const navigate = useNavigate();
+
+  const goToPage = (page) => {
+    navigate(page, { replace: true });
+  };
   return (
     <Wrapper>
       <BannerTextWrapper>
@@ -14,7 +20,7 @@ const BookRoomBanner = () => {
           sekarang!
         </Description>
 
-        <ButtonPrimary className="w-fit">Book a Room</ButtonPrimary>
+        <ButtonPrimary className="w-fit" onClick={() => goToPage("/beranda#room")}>Book a Room</ButtonPrimary>
       </BannerTextWrapper>
     </Wrapper>
   );

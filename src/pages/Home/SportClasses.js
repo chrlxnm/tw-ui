@@ -8,13 +8,13 @@ import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const SportClasses = ({ openModal }) => {
+const SportClasses = ({ openModal, idRef }) => {
   const navigate = useNavigate();
   const goToPage = (page) => {
     navigate(page, { replace: true });
   };
   return (
-    <Wrapper>
+    <Wrapper ref={idRef}>
       <HeaderWrapper>
         <HeaderTextWrapper>
           <HeaderTitle>Sport Classes</HeaderTitle>

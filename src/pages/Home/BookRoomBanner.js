@@ -3,7 +3,7 @@ import { ButtonPrimary } from "components/Button";
 import React from "react";
 import styled from "styled-components";
 
-const BookRoomBanner = () => {
+const BookRoomBanner = ({goToRoom}) => {
   return (
     <Wrapper>
       <BannerTextWrapper>
@@ -14,7 +14,7 @@ const BookRoomBanner = () => {
           sekarang!
         </Description>
 
-        <ButtonPrimary className="w-fit">Book a Room</ButtonPrimary>
+        <ButtonPrimary className="w-fit" onClick={goToRoom}>Book a Room</ButtonPrimary>
       </BannerTextWrapper>
     </Wrapper>
   );

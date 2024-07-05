@@ -5,9 +5,9 @@ import RoomCard from "components/RoomCard/RoomCard";
 import { RoomData } from "constant/dummyData";
 import styled from "styled-components";
 
-const BookRoomSection = ({ openModal }) => {
+const BookRoomSection = ({ openModal, idRef }) => {
   return (
-    <Wrapper>
+    <Wrapper ref={idRef}>
       <Title>Booking Ruangan</Title>
       <Row gutter={[16, 16]}>
         {RoomData.map((item) => (
@@ -29,7 +29,7 @@ const BookRoomSection = ({ openModal }) => {
 
 export default BookRoomSection;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin: 0 80px;
   margin-top: 32px;
   @media screen and (max-width: 768px) {

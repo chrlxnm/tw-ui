@@ -1,6 +1,6 @@
 import "./style.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import BannerSection from "./BannerSection";
 import BookRoomBanner from "./BookRoomBanner";
@@ -11,6 +11,7 @@ import RoomModal from "components/RoomModal";
 import SportClasses from "./SportClasses";
 import TWAlert from "components/Alert";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
   const isAuthenticated = localStorage.getItem("authToken");
@@ -23,9 +24,27 @@ const Home = () => {
     data: undefined,
   });
 
+  const roomRef = useRef(null);
+  const classRef = useRef(null);
+
+  const location = useLocation();
+
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, []);
+    const hash = location.hash;
+    if (hash === "#room") {
+      roomRef.current.scrollIntoView({ behavior: "smooth" });
+    } else if (hash === "#class") {
+      classRef.current.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }, [location]);
+
+  function goToRoomSection() {
+    if (roomRef?.current) {
+      roomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }
 
   const openClassModal = (data) => {
     setDataClassModal({
@@ -75,9 +94,9 @@ const Home = () => {
       />
       <BannerSection />
       {isAuthenticated && <OnGoing />}
-      <SportClasses openModal={openClassModal} />
-      <BookRoomBanner />
-      <BookRoomSection openModal={openRoomModal} />
+      <SportClasses idRef={classRef} openModal={openClassModal} />
+      <BookRoomBanner goToRoom={() => goToRoomSection()} />
+      <BookRoomSection idRef={roomRef} openModal={openRoomModal} />
     </HomeWrapper>
   );
 };
