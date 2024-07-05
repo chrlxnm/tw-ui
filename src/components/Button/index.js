@@ -16,6 +16,13 @@ export const ButtonPrimary = styled(Button)`
     font-weight: 500;
     color: white;
   }
+  
+  @media screen and (max-width: 768px) {
+    height: 36px;
+    span {
+      font-size: 12px;
+    }
+  }
 `;
 export const ButtonSecondary = styled(Button)`
   height: 48px;

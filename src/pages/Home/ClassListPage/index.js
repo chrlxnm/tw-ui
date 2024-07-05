@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ReactComponent as BackIcon } from "../../../assets/icons/back-icon.svg";
 import BookRoomBanner from "./RoomBanner";
@@ -19,6 +19,10 @@ const ClassListPage = () => {
   const goToPage = (page) => {
     navigate(page, { replace: true });
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
 
   const [dataClassModal, setDataClassModal] = useState({
     visible: false,

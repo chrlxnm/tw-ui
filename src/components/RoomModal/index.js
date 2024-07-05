@@ -12,7 +12,6 @@ import React from "react";
 import { ReactComponent as Speaker } from "assets/icons/speaker.svg";
 import { ReactComponent as TV } from "assets/icons/tv.svg";
 import { ReactComponent as Users } from "assets/icons/users.svg";
-import poundFit from "../../assets/images/poundfit-image.png";
 import styled from "styled-components";
 
 const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
@@ -238,6 +237,12 @@ const LeftSide = styled.div`
 const RightSide = styled.div`
   display: grid;
   width: 100%;
+  overflow: auto;
+  height: 80vh;
+  
+  @media screen and (max-width: 768px) {
+    height: 100%;
+  }
 `;
 
 const Image = styled.img`
@@ -260,7 +265,6 @@ const Modal = styled(ModalAntd)`
     display: none !important;
   }
   .ant-modal-body {
-    overflow: auto;
     max-height: calc(90vh - 72px);
   }
 

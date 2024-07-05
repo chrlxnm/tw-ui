@@ -79,12 +79,17 @@ const BadgeWrapper = styled.div`
 const Badge = styled.div`
   display: flex;
   width: fit-content;
-  height: 35px;
+  min-height: 35px;
   padding: 7px 12px 7px 12px;
   gap: 8px;
   border-radius: 8px;
   background: #f2f2f2;
   color: #535353;
+  width: fit-content;
+  
+  @media only screen and (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 const JoinedText = styled.p`

@@ -59,13 +59,21 @@ const BannerTextWrapper = styled.div`
   width: 50%;
   padding: 36px;
   gap: 16px;
+  
+  
+  @media only screen and (max-width: 992px) {
+    width: 70%;
+    padding: 16px;
+  }
+  
   @media screen and (max-width: 768px) {
     width: 70%;
     padding: 12px;
   }
-  @media only screen and (max-width: 992px) {
-    width: 70%;
-    padding: 16px;
+  
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding: 12px;
   }
 `;
 
@@ -74,11 +82,12 @@ const Title = styled.p`
   font-weight: 700;
   color: #ffffff;
 
-  @media screen and (max-width: 768px) {
-    font-size: 20px;
-  }
   @media only screen and (max-width: 992px) {
     font-size: 24px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
   }
 
   @media screen and (max-width: 480px) {
@@ -89,11 +98,13 @@ const Description = styled.p`
   font-size: 14px;
   font-weight: 400;
   color: #ffffff;
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-  }
+  
   @media only screen and (max-width: 992px) {
     font-size: 14px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
   }
 
   @media screen and (max-width: 480px) {

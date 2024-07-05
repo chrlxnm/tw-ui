@@ -66,7 +66,7 @@ export default Footer;
 const Wrapper = styled.div`
   height: 312px;
   background-color: #25282b;
-  padding: 48px 72px 48px 72px;
+  padding: 48px 80px 48px 80px;
   color: white;
   display: grid;
   align-content: space-between;
@@ -103,7 +103,7 @@ const MenuItemWrapper = styled.div`
 `;
 
 const MenuItem = styled.div`
-  display: grid;
+  display: block;
 `;
 
 const MenuHeader = styled.div`
@@ -125,6 +125,9 @@ const CopyRightWrapper = styled.div`
   justify-content: space-between;
   border-top: 2px solid white;
   padding-top: 24px;
+  p {
+    font-weight: 700;
+  }
   @media screen and (max-width: 768px) {
     flex-direction: column;
     gap: 36px;
@@ -133,7 +136,10 @@ const CopyRightWrapper = styled.div`
 
 const CopyRight = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 36px;
+  p {
+    font-weight: 700;
+  }
   @media screen and (max-width: 768px) {
     display: grid;
     gap: 24px;

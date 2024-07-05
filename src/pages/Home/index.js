@@ -1,6 +1,6 @@
 import "./style.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import BannerSection from "./BannerSection";
 import BookRoomBanner from "./BookRoomBanner";
@@ -22,6 +22,10 @@ const Home = () => {
     visible: false,
     data: undefined,
   });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
 
   const openClassModal = (data) => {
     setDataClassModal({

@@ -30,6 +30,7 @@ const Wrapper = styled.div`
   
   @media screen and (max-width: 768px) {
     margin: 24px;
+    padding: 16px;
   }
 `;
 
@@ -40,9 +41,25 @@ const LeftWrapper = styled.div`
 const Title = styled.p`
   font-size: 24px;
   font-weight: 600;
+  
+  @media screen and (max-width: 768px) {
+    font-size: 18px;
+  }
+  
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 const Description = styled.p`
   font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
+  
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 8px;
+  }
 `;

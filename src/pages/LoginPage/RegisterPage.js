@@ -34,7 +34,7 @@ const RegisterSection = ({ toLogin }) => {
       <RegisterContent>
         <div className="login-header">
           <LogoWrapper>
-            <Title>Employe</Title>
+            <Title>Employee</Title>
             <Title red>Corner</Title>
           </LogoWrapper>
           <Title>Register Wellness Portal</Title>

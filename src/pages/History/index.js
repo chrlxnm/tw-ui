@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Chip from "components/Chip/Chip";
 import HistoryCard from "./HistoryCard";
@@ -9,6 +9,11 @@ import styled from "styled-components";
 const History = () => {
   const [section, setSection] = useState("class");
   const [status, setStatus] = useState("all");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+  
   return (
     <Wrapper>
       <Title>Riwayat Booking</Title>

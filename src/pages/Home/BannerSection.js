@@ -24,7 +24,9 @@ const BannerSection = () => {
           sekarang!
         </BannerDescription>
         {!isAuthenticated && (
-          <ButtonPrimary className="w-fit" onClick={goToLoginPage}>Join Wellness</ButtonPrimary>
+          <ButtonPrimary className="w-fit" onClick={goToLoginPage}>
+            Join Wellness
+          </ButtonPrimary>
         )}
       </BannerTextWrapper>
     </Banner>
@@ -45,12 +47,15 @@ const Banner = styled.div`
   width: 100vw;
   height: 500px;
   padding: 24px;
+  margin-bottom: 80px;
 
   @media screen and (max-width: 768px) {
     height: 300px;
+    margin-bottom: 24px;
   }
 
   @media screen and (max-width: 480px) {
+    margin-bottom: 24px;
     height: 250px;
   }
 `;
@@ -69,16 +74,18 @@ const BumnWrapper = styled.div`
 const BannerTextWrapper = styled.div`
   display: grid;
   width: 50%;
-  padding: 36px;
+  padding: 36px 56px;
   gap: 16px;
 
   @media screen and (max-width: 768px) {
     width: 70%;
-    padding: 12px;
+    padding: 12px 0px;
   }
 
   @media screen and (max-width: 480px) {
     gap: 8px;
+    width: 70%;
+    padding: 12px 0px;
   }
 `;
 

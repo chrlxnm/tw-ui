@@ -41,7 +41,7 @@ const Header = () => {
         <div className="nav_logo">
           <Link to={"/"} className="nav-logo-link">
             <p className="font-bold text-[28px]">
-              <span>Employe</span>
+              <span>Employee</span>
               <span className="text-[#EE2E24]">Corner</span>
             </p>
           </Link>
@@ -117,7 +117,6 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   .nav_logo {
-    padding: 0 12px;
     .nav-logo-link {
       text-decoration: none;
       font-size: 24px;
