@@ -80,7 +80,7 @@ const LoginPageSection = ({ toRegister }) => {
             </ButtonPrimary>
           </Form.Item>
         </Form>
-        <div className="flex gap-[4px]">
+        <div className="flex gap-[4px] justify-center">
           <p className="text-[#1E1E1E] text-[16px]">Belum memiliki akun?</p>
           <p
             className="text-[#FF0000] text-[16px] font-semibold cursor-pointer"
