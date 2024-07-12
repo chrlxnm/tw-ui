@@ -10,6 +10,7 @@ import ClassModal from "components/ClassModal";
 import { Input } from "components/Input";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import TWAlert from "components/Alert";
+import { getFiveNextDay } from "utils";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -85,25 +86,17 @@ const ClassListPage = () => {
           onClick={() => setTime("all")}
         />
         <Chip
-          label={"Hari ini"}
-          active={time === "today"}
-          onClick={() => setTime("today")}
-        />
-        <Chip
-          label={"Besok"}
-          active={time === "tommorow"}
-          onClick={() => setTime("tommorow")}
-        />
-        <Chip
-          label={"Minggu ini"}
-          active={time === "this_week"}
-          onClick={() => setTime("this_week")}
-        />
-        <Chip
           label={"Bulan ini"}
-          active={time === "this_month"}
-          onClick={() => setTime("this_month")}
+          active={time === "Bulan ini"}
+          onClick={() => setTime("Bulan ini")}
         />
+        {getFiveNextDay().map((item) => (
+          <Chip
+            label={item}
+            active={time === item}
+            onClick={() => setTime(item)}
+          />
+        ))}
       </ChipWrapper>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={16} xl={16} xxl={16}>

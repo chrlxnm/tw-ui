@@ -33,7 +33,6 @@ const Home = () => {
 
   useEffect(() => {
     const hash = location.hash;
-
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
