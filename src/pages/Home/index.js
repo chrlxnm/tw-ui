@@ -36,21 +36,21 @@ const Home = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-      if (hash === "#room") {
-        if (roomRef?.current) {
-          roomRef.current.scrollIntoView({ behavior: "smooth" });
-        }
-      } else if (hash === "#class") {
-        if (classRef?.current) {
-          classRef.current.scrollIntoView({ behavior: "smooth" });
-        }
-      } else {
-        window.scrollTo({ top: 0, behavior: "auto" });
-      }
     }, 1000);
     
+    if (hash === "#room" && !isLoading) {
+      if (roomRef?.current) {
+        roomRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    } else if (hash === "#class" && !isLoading) {
+      if (classRef?.current) {
+        classRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
     
-  }, [location]);
+  }, [location, isLoading]);
 
   function goToRoomSection() {
     if (roomRef?.current) {
