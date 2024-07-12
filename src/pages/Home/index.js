@@ -33,17 +33,23 @@ const Home = () => {
 
   useEffect(() => {
     const hash = location.hash;
-    if (hash === "#room") {
-      roomRef.current.scrollIntoView({ behavior: "smooth" });
-    } else if (hash === "#class") {
-      classRef.current.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }
 
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+      if (hash === "#room") {
+        if (roomRef?.current) {
+          roomRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      } else if (hash === "#class") {
+        if (classRef?.current) {
+          classRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+    }, 1000);
+    
+    
   }, [location]);
 
   function goToRoomSection() {
