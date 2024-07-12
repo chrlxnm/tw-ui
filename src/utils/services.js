@@ -1,40 +1,61 @@
-import { BASE_URL } from 'constant/paths';
-import axios from 'axios';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-const appService = axios.create({
-  baseURL: BASE_URL, // Replace with your API base URL
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
+// Create a context to manage loading state
+const LoadingContext = createContext();
+
+export const LoadingProvider = ({ children }) => {
+  const [loading, setLoading] = useState(false);
+  return (
+    <LoadingContext.Provider value={{ loading, setLoading }}>
+      {children}
+    </LoadingContext.Provider>
+  );
+};
+
+export const useLoading = () => useContext(LoadingContext);
+
+const axiosInstance = axios.create({
+  baseURL: 'https://api.employeecornertelkom.com', // Replace with your API base URL
 });
 
-// Request Interceptor
-appService.interceptors.request.use(
-  config => {
-    // Modify the request config here (e.g., add authorization header)
-    const token = localStorage.getItem('token'); // Replace with your token retrieval logic
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+const excludedUrls = ['/login', '/signup']; // Add URLs to exclude from loading indicator
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const { setLoading } = useLoading();
+    if (!excludedUrls.includes(config.url)) {
+      setLoading(true);
     }
     return config;
   },
-  error => {
+  (error) => {
+    const { setLoading } = useLoading();
+    setLoading(false);
     return Promise.reject(error);
   }
 );
 
-// Response Interceptor
-appService.interceptors.response.use(
-  response => {
-    // Modify the response here (e.g., transform data)
+axiosInstance.interceptors.response.use(
+  (response) => {
+    const { setLoading } = useLoading();
+    setLoading(false);
     return response;
   },
-  error => {
-    // Handle errors (e.g., redirect to login if unauthorized)
+  (error) => {
+    const { setLoading } = useLoading();
+    setLoading(false);
     if (error.response && error.response.status === 401) {
-      // Redirect to login or handle unauthorized access
-      console.log('Unauthorized, logging out...');
-      // Add your logout logic here
+      // Handle logout
+      const history = useHistory();
+      // Perform logout operation (e.g., clear tokens)
+      // Redirect to login page
+      history.push('/login');
     }
     return Promise.reject(error);
   }
 );
 
-export default appService;
+export default axiosInstance;

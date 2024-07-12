@@ -21,5 +21,8 @@ const Wrapper = styled.div`
   font-size: 14px;
   color: ${(props) => (props.active ? "#FF0000" : " #000000")};
   width: fit-content;
+  height: fit-content;
   border-radius: 100px;
+  display: flex;
+  align-items: center;
 `;
