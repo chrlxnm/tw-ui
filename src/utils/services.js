@@ -12,8 +12,6 @@ const twService = axios.create({
   },
 });
 
-const excludedUrls = []; // Add URLs to exclude from loading indicator
-
 twService.interceptors.request.use(
   (config) => {
     return config;

@@ -1,3 +1,4 @@
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Form, Input as InputAntd, message } from "antd";
 import React, { useState } from "react";
 
@@ -26,7 +27,6 @@ const RegisterSection = ({ toLogin }) => {
 
   const loginService = async (event) => {
     setLoading(true);
-    console.log("EHEHE", event);
     let payload = {
       name: event?.name,
       email: data?.email,
@@ -62,6 +62,7 @@ const RegisterSection = ({ toLogin }) => {
 
   return (
     <RegisterWrapper>
+      {contextHolder}
       <RegisterContent>
         <div className="login-header">
           <LogoWrapper>
@@ -103,7 +104,12 @@ const RegisterSection = ({ toLogin }) => {
                 },
               ]}
             >
-              <Input placeholder="Masukkan password" />
+              <InputPassword
+                placeholder="Masukkan password"
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+              />
             </Form.Item>
             <Form.Item>
               <ButtonPrimary
@@ -161,7 +167,11 @@ const RegisterSection = ({ toLogin }) => {
               <Input placeholder="Masukkan unit/divisi" />
             </Form.Item>
             <Form.Item>
-              <ButtonPrimary htmlType="submit" className="w-full h-[42px]">
+              <ButtonPrimary
+                loading={isLoading}
+                htmlType="submit"
+                className="w-full h-[42px]"
+              >
                 Lanjut
               </ButtonPrimary>
             </Form.Item>
@@ -211,4 +221,8 @@ const Title = styled.p`
   font-size: 24px;
   font-weight: 600;
   color: ${(props) => (props.red ? "#FF0000" : "#000000")};
+`;
+
+const InputPassword = styled(InputAntd.Password)`
+  height: 42px;
 `;

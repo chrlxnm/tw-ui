@@ -1,3 +1,4 @@
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Form, Input as InputAntd, message } from "antd";
 import React, { useState } from "react";
 
@@ -93,7 +94,10 @@ const LoginPageSection = ({ toRegister }) => {
               },
             ]}
           >
-            <Input placeholder="Masukkan password" />
+            <InputPassword
+              placeholder="Masukkan password"
+              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            />
           </Form.Item>
           <p className="text-[#FF0000] font-bold mb-[16px]">Lupa password?</p>
           <Form.Item>
@@ -145,6 +149,10 @@ const LoginContent = styled.div`
 `;
 
 const Input = styled(InputAntd)`
+  height: 42px;
+`;
+
+const InputPassword = styled(InputAntd.Password)`
   height: 42px;
 `;
 
