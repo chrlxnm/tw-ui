@@ -15,7 +15,7 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
 const Home = () => {
-  const isAuthenticated = localStorage.getItem("authToken");
+  const isAuthenticated = localStorage.getItem("token");
   const [dataClassModal, setDataClassModal] = useState({
     visible: false,
     data: undefined,

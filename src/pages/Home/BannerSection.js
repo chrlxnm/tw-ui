@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const BannerSection = () => {
-  const isAuthenticated = localStorage.getItem("authToken");
+  const isAuthenticated = localStorage.getItem("token");
   const navigate = useNavigate();
   const goToLoginPage = () => {
     navigate("/login", { replace: true });

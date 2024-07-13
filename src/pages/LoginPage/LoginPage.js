@@ -7,11 +7,9 @@ import { LOGIN_URL } from "constant/paths";
 import styled from "styled-components";
 import twService from "utils/services";
 import { useAuth } from "contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 const LoginPageSection = ({ toRegister }) => {
   const [form] = Form.useForm();
-  const navigate = useNavigate();
   const { login } = useAuth();
   const [isDisabled, setIsDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
@@ -40,7 +38,6 @@ const LoginPageSection = ({ toRegister }) => {
 
   const onLogin = (event) => {
     login(event);
-    navigate("/beranda", { replace: true });
   };
 
   const onValuesChange = () => {

@@ -14,7 +14,7 @@ const RegisterSection = ({ toLogin }) => {
   const [section, setSection] = useState("email");
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const [isDisabled, setIsDisabled] = useState(true);
   const [data, setData] = useState(true);
 
@@ -50,7 +50,7 @@ const RegisterSection = ({ toLogin }) => {
   };
   const onRegister = (event) => {
     login(event);
-    navigate("/beranda", { replace: true });
+    user && navigate("/beranda", { replace: true });
   };
 
   const onValuesChange = () => {

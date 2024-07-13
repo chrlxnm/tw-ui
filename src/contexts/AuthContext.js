@@ -9,19 +9,23 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("authToken");
+    const savedUser = localStorage.getItem("token");
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      setUser(savedUser);
+      navigate("/beranda", { replace: true });
     }
-  }, []);
+  }, [navigate]);
 
   const login = (userData) => {
-    localStorage.setItem("authToken", JSON.stringify(userData));
-    setUser(userData);
+    if (userData && userData !== undefined && userData !== "") {
+      setUser(userData);
+      localStorage.setItem("token", userData);
+      navigate("/beranda", { replace: true });
+    }
   };
 
   const logout = () => {
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("token");
     setUser(null);
     navigate("/login", { replace: true });
   };
