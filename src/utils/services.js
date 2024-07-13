@@ -14,6 +14,10 @@ const twService = axios.create({
 
 twService.interceptors.request.use(
   (config) => {
+    const token = localStorage.getItem('token'); // Retrieve the token from local storage or any other storage method
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => {
