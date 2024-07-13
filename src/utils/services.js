@@ -1,61 +1,42 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-
+import { BASE_URL } from 'constant/paths';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Create a context to manage loading state
-const LoadingContext = createContext();
 
-export const LoadingProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
-  return (
-    <LoadingContext.Provider value={{ loading, setLoading }}>
-      {children}
-    </LoadingContext.Provider>
-  );
-};
-
-export const useLoading = () => useContext(LoadingContext);
-
-const axiosInstance = axios.create({
-  baseURL: 'https://api.employeecornertelkom.com', // Replace with your API base URL
+const twService = axios.create({
+  baseURL: BASE_URL, // Replace with your API base URL
+  timeout: 10000, // Request timeout
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-const excludedUrls = ['/login', '/signup']; // Add URLs to exclude from loading indicator
+const excludedUrls = []; // Add URLs to exclude from loading indicator
 
-axiosInstance.interceptors.request.use(
+twService.interceptors.request.use(
   (config) => {
-    const { setLoading } = useLoading();
-    if (!excludedUrls.includes(config.url)) {
-      setLoading(true);
-    }
     return config;
   },
   (error) => {
-    const { setLoading } = useLoading();
-    setLoading(false);
     return Promise.reject(error);
   }
 );
 
-axiosInstance.interceptors.response.use(
+twService.interceptors.response.use(
   (response) => {
-    const { setLoading } = useLoading();
-    setLoading(false);
     return response;
   },
   (error) => {
-    const { setLoading } = useLoading();
-    setLoading(false);
     if (error.response && error.response.status === 401) {
       // Handle logout
-      const history = useHistory();
+      const navigate = useNavigate();
       // Perform logout operation (e.g., clear tokens)
       // Redirect to login page
-      history.push('/login');
+      navigate('/login');
     }
     return Promise.reject(error);
   }
 );
 
-export default axiosInstance;
+export default twService;

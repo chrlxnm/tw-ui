@@ -1,9 +1,11 @@
-import { Form, Input as InputAntd } from "antd";
+import { Form, Input as InputAntd, message } from "antd";
 import React, { useState } from "react";
 
 import { ButtonPrimary } from "components/Button";
 import Capsule from "components/Capsule";
+import { REGISTER_URL } from "constant/paths";
 import styled from "styled-components";
+import twService from "utils/services";
 import { useAuth } from "contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -13,12 +15,41 @@ const RegisterSection = ({ toLogin }) => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [isDisabled, setIsDisabled] = useState(true);
+  const [data, setData] = useState(true);
 
   const onNext = (event) => {
+    setData(event);
     setSection("data");
   };
+  const [isLoading, setLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const loginService = async (event) => {
+    setLoading(true);
+    console.log("EHEHE", event);
+    let payload = {
+      name: event?.name,
+      email: data?.email,
+      password: data?.password,
+      nik: event?.nik,
+      password_confirmation: data?.password,
+    };
+    try {
+      const response = await twService.post(REGISTER_URL, payload); // Replace with your API endpoint
+      onRegister(response?.data?.accessToken);
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content:
+          error?.response?.data?.message ||
+          "Terjadi kesalahan di sistem, silakan hubungi admin.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   const onRegister = (event) => {
-    login(event?.name);
+    login(event);
     navigate("/beranda", { replace: true });
   };
 
@@ -91,7 +122,7 @@ const RegisterSection = ({ toLogin }) => {
             layout="vertical"
             autoComplete="off"
             requiredMark={false}
-            onFinish={onRegister}
+            onFinish={loginService}
           >
             <Form.Item
               name="name"
