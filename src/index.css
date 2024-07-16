@@ -22,7 +22,6 @@ body {
 }
 
 body {
-  overflow: auto !important;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   -webkit-font-smoothing: antialiased;

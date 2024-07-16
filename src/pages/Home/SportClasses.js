@@ -2,7 +2,6 @@ import { Col, Input, Row } from "antd";
 
 import { ButtonSecondary } from "components/Button";
 import ClassCard from "components/ClassCard";
-import { ClassData } from "constant/dummyData";
 import React from "react";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
@@ -10,7 +9,7 @@ import useGetClass from "./hooks/useGetClass";
 import { useNavigate } from "react-router-dom";
 
 const SportClasses = ({ openModal, idRef }) => {
-  const { data, loading } = useGetClass();
+  const { data } = useGetClass();
   const navigate = useNavigate();
   const goToPage = (page) => {
     navigate(page, { replace: true });

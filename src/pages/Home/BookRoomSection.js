@@ -2,12 +2,11 @@ import { Col, Row } from "antd";
 
 import React from "react";
 import RoomCard from "components/RoomCard/RoomCard";
-import { RoomData } from "constant/dummyData";
 import styled from "styled-components";
 import useGetRoom from "./hooks/useGetRoom";
 
 const BookRoomSection = ({ openModal, idRef }) => {
-  const { data, loading } = useGetRoom();
+  const { data } = useGetRoom();
   return (
     <Wrapper ref={idRef}>
       <Title>Booking Ruangan</Title>
