@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 
+import { ROOM_LIST_URL } from 'constant/paths';
 import twService from 'utils/services';
 
-const useGetRoom = (endpoint) => {
+const useGetRoom = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -10,8 +11,8 @@ const useGetRoom = (endpoint) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await twService.get(endpoint);
-        setData(response.data);
+        const response = await twService.get(ROOM_LIST_URL);
+        setData(response?.data?.data || []);
       } catch (error) {
         setError(error);
       } finally {
@@ -20,7 +21,7 @@ const useGetRoom = (endpoint) => {
     };
 
     fetchData();
-  }, [endpoint]);
+  }, []);
 
   return { data, error, loading };
 };

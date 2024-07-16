@@ -4,13 +4,15 @@ import React from "react";
 import RoomCard from "components/RoomCard/RoomCard";
 import { RoomData } from "constant/dummyData";
 import styled from "styled-components";
+import useGetRoom from "./hooks/useGetRoom";
 
 const BookRoomSection = ({ openModal, idRef }) => {
+  const { data, loading } = useGetRoom();
   return (
     <Wrapper ref={idRef}>
       <Title>Booking Ruangan</Title>
       <Row gutter={[16, 16]}>
-        {RoomData.map((item) => (
+        {data?.map((item) => (
           <Col
             xs={24}
             sm={24}

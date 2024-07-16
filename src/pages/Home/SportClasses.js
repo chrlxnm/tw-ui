@@ -6,9 +6,11 @@ import { ClassData } from "constant/dummyData";
 import React from "react";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
+import useGetClass from "./hooks/useGetClass";
 import { useNavigate } from "react-router-dom";
 
 const SportClasses = ({ openModal, idRef }) => {
+  const { data, loading } = useGetClass();
   const navigate = useNavigate();
   const goToPage = (page) => {
     navigate(page, { replace: true });
@@ -36,7 +38,7 @@ const SportClasses = ({ openModal, idRef }) => {
         prefix={<SearchIcon />}
       />
       <Row gutter={[16, 16]}>
-        {ClassData.map((item) => (
+        {data?.map((item) => (
           <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
             <ClassCard data={item} openModal={openModal} />
           </Col>

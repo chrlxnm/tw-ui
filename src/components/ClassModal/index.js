@@ -11,13 +11,14 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
+    console.log("HEHEHE", data)
     form.setFieldsValue({
-      name: "Teddy Krisna",
+      name: data?.name,
       nik: "1927378021",
       unit: "IT Development",
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data, visible]);
 
   const onFinish = () => {
     closeModal();
