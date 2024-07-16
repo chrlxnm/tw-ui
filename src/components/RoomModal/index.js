@@ -4,11 +4,11 @@ import {
   Modal as ModalAntd,
   Select as SelectAntd,
 } from "antd";
+import React, { useEffect } from "react";
 
 import AlertBanner from "./Alert";
 import { ButtonPrimary } from "components/Button";
 import { Input } from "components/Input";
-import React from "react";
 import { ReactComponent as Speaker } from "assets/icons/speaker.svg";
 import { ReactComponent as TV } from "assets/icons/tv.svg";
 import { ReactComponent as Users } from "assets/icons/users.svg";
@@ -16,6 +16,17 @@ import styled from "styled-components";
 
 const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto"; // Clean up on unmount
+    };
+  }, [visible]);
 
   const onFinish = () => {
     closeModal();
@@ -239,7 +250,7 @@ const RightSide = styled.div`
   width: 100%;
   overflow: auto;
   height: 80vh;
-  
+
   @media screen and (max-width: 768px) {
     height: 100%;
   }

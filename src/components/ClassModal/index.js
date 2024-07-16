@@ -11,14 +11,21 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    console.log("HEHEHE", data)
+    if (visible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
     form.setFieldsValue({
       name: data?.name,
       nik: "1927378021",
       unit: "IT Development",
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, visible]);
+
+    return () => {
+      document.body.style.overflow = "auto"; // Clean up on unmount
+    };
+  }, [data, form, visible]);
 
   const onFinish = () => {
     closeModal();
