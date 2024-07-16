@@ -58,14 +58,6 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
               <Users />
               Kuota {data?.kuota} orang
             </GreyBadge>
-            <GreyBadge>
-              <TV />
-              TV
-            </GreyBadge>
-            <GreyBadge>
-              <Speaker />
-              Sound
-            </GreyBadge>
           </BadgeWrapper>
           <AlertBanner />
         </LeftSide>
