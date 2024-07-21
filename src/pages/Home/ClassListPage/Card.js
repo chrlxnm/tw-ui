@@ -9,10 +9,10 @@ const Card = ({ data, openModal }) => {
     <Wrapper>
       <LeftWrapper>
         <ContentWrapper>
-          <Image src={data?.img} alt="photo" />
+          <Image src={data?.images?.[0]?.url} alt="photo" />
           <TitleWrapper>
             <Date>{data?.date || "-"}</Date>
-            <Title>{data?.title || "-"}</Title>
+            <Title>{data?.name || "-"}</Title>
             <JoinedDesc>
               {data?.registered || "0"} orang sudah mendaftar
             </JoinedDesc>
@@ -21,7 +21,7 @@ const Card = ({ data, openModal }) => {
         <BadgeWrapper>
           <GreyBadge>
             <Users />
-            Kuota {data?.kuota || "0"} orang
+            Kuota {data?.quota || "0"} orang
           </GreyBadge>
           <GreyBadge>
             <Clock />

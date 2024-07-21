@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Col, Row, Skeleton } from "antd";
 
 import React from "react";
 import RoomCard from "components/RoomCard/RoomCard";
@@ -6,24 +6,28 @@ import styled from "styled-components";
 import useGetRoom from "./hooks/useGetRoom";
 
 const BookRoomSection = ({ openModal, idRef }) => {
-  const { data } = useGetRoom();
+  const { data, loading } = useGetRoom();
   return (
     <Wrapper ref={idRef}>
       <Title>Booking Ruangan</Title>
-      <Row gutter={[16, 16]}>
-        {data?.map((item) => (
-          <Col
-            xs={24}
-            sm={24}
-            md={8}
-            lg={6}
-            xl={4}
-            onClick={() => openModal(item)}
-          >
-            <RoomCard data={item} />
-          </Col>
-        ))}
-      </Row>
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <Row gutter={[16, 16]}>
+          {data?.map((item) => (
+            <Col
+              xs={24}
+              sm={24}
+              md={8}
+              lg={6}
+              xl={4}
+              onClick={() => openModal(item)}
+            >
+              <RoomCard data={item} />
+            </Col>
+          ))}
+        </Row>
+      )}
     </Wrapper>
   );
 };

@@ -20,10 +20,11 @@ const LoginPageSection = ({ toRegister }) => {
     let payload = {
       email: event.email,
       password: event.password,
+      remember: true
     };
     try {
       const response = await twService.post(LOGIN_URL, payload); // Replace with your API endpoint
-      onLogin(response?.data?.accessToken);
+      onLogin(response?.data?.access_token);
     } catch (error) {
       messageApi.open({
         type: "error",
@@ -96,7 +97,6 @@ const LoginPageSection = ({ toRegister }) => {
               iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             />
           </Form.Item>
-          <p className="text-[#FF0000] font-bold mb-[16px]">Lupa password?</p>
           <Form.Item>
             <ButtonPrimary
               loading={isLoading}

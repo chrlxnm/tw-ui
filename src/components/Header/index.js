@@ -1,10 +1,10 @@
 import { ButtonPrimary, ButtonSecondary } from "components/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import { ReactComponent as Logout } from "assets/icons/log-out.svg";
 import styled from "styled-components";
 import { useAuth } from "contexts/AuthContext";
+import { useState } from "react";
 
 const Header = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -21,20 +21,7 @@ const Header = () => {
   const handleToggleOpen = () => {
     setIsToggleOpen(!isToggleOpen);
   };
-
-  useEffect(() => {
-    // Disable scrolling when the menu is open
-    if (isToggleOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    // Clean up
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isToggleOpen]);
+  
   return (
     <>
       <StyledHeader>

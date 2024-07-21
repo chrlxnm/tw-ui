@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Col, Row, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 
 import { ReactComponent as BackIcon } from "../../../assets/icons/back-icon.svg";
@@ -12,10 +12,12 @@ import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import TWAlert from "components/Alert";
 import { getFiveNextDay } from "utils";
 import styled from "styled-components";
+import useGetClass from "../hooks/useGetClass";
 import { useNavigate } from "react-router-dom";
 
 const ClassListPage = () => {
   const navigate = useNavigate();
+  const { data, loading } = useGetClass();
   const [time, setTime] = useState("all");
   const goToPage = (page) => {
     navigate(page, { replace: true });
@@ -100,9 +102,13 @@ const ClassListPage = () => {
       </ChipWrapper>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={24} lg={16} xl={16} xxl={16}>
-          {ClassData?.map((item) => (
-            <Card data={item} openModal={() => openClassModal(item)} />
-          ))}
+          {loading ? (
+            <Skeleton />
+          ) : (
+            data?.map((item) => (
+              <Card data={item} openModal={() => openClassModal(item)} />
+            ))
+          )}
         </Col>
         <Col xs={24} sm={24} md={24} lg={8} xl={8} xxl={8}>
           <BookRoomBanner />

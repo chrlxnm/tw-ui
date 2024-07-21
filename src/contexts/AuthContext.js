@@ -14,7 +14,8 @@ export const AuthProvider = ({ children }) => {
       setUser(savedUser);
       navigate("/beranda", { replace: true });
     }
-  }, [navigate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const login = (userData) => {
     if (userData && userData !== undefined && userData !== "") {

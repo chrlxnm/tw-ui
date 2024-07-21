@@ -7,14 +7,14 @@ import styled from "styled-components";
 const ClassCard = ({ openModal, data }) => {
   return (
     <Wrapper>
-      <Image alt="image" src={data?.img} />
+      <Image alt="image" src={data?.images?.[0]?.url} />
       <ContentWrapper>
         <TextDate>{data?.date}</TextDate>
-        <TextTitle>{data?.title}</TextTitle>
+        <TextTitle>{data?.name}</TextTitle>
         <BadgeWrapper>
           <Badge>
             <Users />
-            Kuota {data?.kuota} orang
+            Kuota {data?.quota} orang
           </Badge>
           <Badge>
             <Clock />

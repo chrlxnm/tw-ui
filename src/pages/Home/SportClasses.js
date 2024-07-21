@@ -1,4 +1,4 @@
-import { Col, Input, Row } from "antd";
+import { Col, Input, Row, Skeleton } from "antd";
 
 import { ButtonSecondary } from "components/Button";
 import ClassCard from "components/ClassCard";
@@ -9,7 +9,7 @@ import useGetClass from "./hooks/useGetClass";
 import { useNavigate } from "react-router-dom";
 
 const SportClasses = ({ openModal, idRef }) => {
-  const { data } = useGetClass();
+  const { data, loading } = useGetClass();
   const navigate = useNavigate();
   const goToPage = (page) => {
     navigate(page, { replace: true });
@@ -36,13 +36,17 @@ const SportClasses = ({ openModal, idRef }) => {
         placeholder="Cari sport class disini . . ."
         prefix={<SearchIcon />}
       />
-      <Row gutter={[16, 16]}>
-        {data?.map((item) => (
-          <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
-            <ClassCard data={item} openModal={openModal} />
-          </Col>
-        ))}
-      </Row>
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <Row gutter={[16, 16]}>
+          {data?.map((item) => (
+            <Col className="gutter-row" xs={24} sm={24} md={12} lg={8} xl={8}>
+              <ClassCard data={item} openModal={openModal} />
+            </Col>
+          ))}
+        </Row>
+      )}
     </Wrapper>
   );
 };

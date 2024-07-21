@@ -24,7 +24,6 @@ const Home = () => {
     visible: false,
     data: undefined,
   });
-  const [isLoading, setIsLoading] = useState(true);
 
   const roomRef = useRef(null);
   const classRef = useRef(null);
@@ -34,14 +33,13 @@ const Home = () => {
   useEffect(() => {
     const hash = location.hash;
     setTimeout(() => {
-      setIsLoading(false);
     }, 1000);
     
-    if (hash === "#room" && !isLoading) {
+    if (hash === "#room") {
       if (roomRef?.current) {
         roomRef.current.scrollIntoView({ behavior: "smooth" });
       }
-    } else if (hash === "#class" && !isLoading) {
+    } else if (hash === "#class") {
       if (classRef?.current) {
         classRef.current.scrollIntoView({ behavior: "smooth" });
       }
@@ -49,7 +47,7 @@ const Home = () => {
       window.scrollTo({ top: 0, behavior: "auto" });
     }
     
-  }, [location, isLoading]);
+  }, [location]);
 
   function goToRoomSection() {
     if (roomRef?.current) {
@@ -79,13 +77,6 @@ const Home = () => {
 
   return (
     <Fragment>
-      {isLoading ? (
-        <div className="grid gap-2">
-          <Skeleton.Image className="!w-full !h-[400px]" active />
-          <Skeleton active />
-          <Skeleton active />
-        </div>
-      ) : (
         <HomeWrapper>
           <TWAlert
             visible={alert?.visible}
@@ -121,7 +112,6 @@ const Home = () => {
           <BookRoomBanner goToRoom={() => goToRoomSection()} />
           <BookRoomSection idRef={roomRef} openModal={openRoomModal} />
         </HomeWrapper>
-      )}
     </Fragment>
   );
 };
