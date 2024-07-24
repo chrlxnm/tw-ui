@@ -1,9 +1,9 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Form, Input as InputAntd, message } from "antd";
+import { LOGIN_URL, USER_PROFIL_URL } from "constant/paths";
 import React, { useState } from "react";
 
 import { ButtonPrimary } from "components/Button";
-import { LOGIN_URL } from "constant/paths";
 import styled from "styled-components";
 import twService from "utils/services";
 import { useAuth } from "contexts/AuthContext";
@@ -37,8 +37,14 @@ const LoginPageSection = ({ toRegister }) => {
     }
   };
 
-  const onLogin = (event) => {
+  const onLogin = async (event) => {
     login(event);
+    try{
+      const response = await twService.post(USER_PROFIL_URL);
+      localStorage.setItem("userProfile", response);
+    } catch(error) {
+      console.error(error)
+    }
   };
 
   const onValuesChange = () => {

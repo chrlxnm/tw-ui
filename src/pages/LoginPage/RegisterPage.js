@@ -37,6 +37,10 @@ const RegisterSection = ({ toLogin }) => {
     try {
       const response = await twService.post(REGISTER_URL, payload); // Replace with your API endpoint
       onRegister(response?.data?.accessToken);
+      localStorage.setItem("name", event?.name);
+      localStorage.setItem("email", data?.email);
+      localStorage.setItem("unit", data?.unit);
+      localStorage.setItem("nik", event?.nik);
     } catch (error) {
       messageApi.open({
         type: "error",

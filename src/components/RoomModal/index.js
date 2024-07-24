@@ -3,30 +3,63 @@ import {
   Form,
   Modal as ModalAntd,
   Select as SelectAntd,
+  message,
 } from "antd";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 import AlertBanner from "./Alert";
 import { ButtonPrimary } from "components/Button";
 import { Input } from "components/Input";
+import { SUBMIT_ROOM_URL } from "constant/paths";
 import { ReactComponent as Users } from "assets/icons/users.svg";
+import moment from "moment";
 import styled from "styled-components";
+import twService from "utils/services";
 
 const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
 
-  const onFinish = () => {
-    closeModal();
-    setAlert({
-      ...alert,
-      visible: true,
-      message: "Pendaftaran ruangan billiard berhasil",
-    });
+  const onFinish = async (event) => {
+    setLoading(true);
+    let payload = {
+      name: event.name,
+      nik: event.nik,
+      unit_division: event.unit,
+      date: event.date,
+      started_time: event.time,
+      duration: event.duration,
+      occupancy: Number(event.total),
+    };
+    try {
+      await twService.post(SUBMIT_ROOM_URL, payload); // Replace with your API endpoint
+      closeModal();
+      setAlert({
+        ...alert,
+        visible: true,
+        message: "Pendaftaran ruangan berhasil",
+      });
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content:
+          error?.response?.data?.message ||
+          "Terjadi kesalahan di sistem, silakan hubungi admin.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const closeModal = () => {
     onClose();
     form.resetFields();
+  };
+
+  const disableDate = (current) => {
+    // Disable dates before today
+    return current && current < moment().startOf("day");
   };
 
   return (
@@ -36,6 +69,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
       onOk={closeModal}
       onCancel={closeModal}
     >
+      { contextHolder }
       <Wrapper>
         <LeftSide>
           <Image alt="photo" src={data?.img} />
@@ -107,6 +141,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
                 placeholder="Pilih tanggal pemesanan"
                 size="large"
                 style={{ width: "100%" }}
+                disabledDate={disableDate}
               />
             </Form.Item>
             <Form.Item
@@ -144,10 +179,10 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
                 size="large"
                 placeholder="Pilih waktu durasi"
                 options={[
-                  { value: "1 Jam", label: "1 Jam" },
-                  { value: "2 Jam", label: "2 Jam" },
-                  { value: "3 Jam", label: "3 Jam" },
-                  { value: "4 Jam", label: "4 Jam", disabled: true },
+                  { value: 1, label: "1 Jam" },
+                  { value: 2, label: "2 Jam" },
+                  { value: 3, label: "3 Jam" },
+                  { value: 4, label: "4 Jam", disabled: true },
                 ]}
               />
             </Form.Item>
@@ -171,7 +206,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
               />
             </Form.Item>
             <Form.Item>
-              <ButtonPrimary htmlType="submit" className="w-full h-[42px]">
+              <ButtonPrimary htmlType="submit" className="w-full h-[42px]" loading={loading}>
                 Kirim
               </ButtonPrimary>
             </Form.Item>

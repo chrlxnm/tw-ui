@@ -5,7 +5,6 @@ import { ReactComponent as BackIcon } from "../../../assets/icons/back-icon.svg"
 import BookRoomBanner from "./RoomBanner";
 import Card from "./Card";
 import Chip from "components/Chip/Chip";
-import { ClassData } from "constant/dummyData";
 import ClassModal from "components/ClassModal";
 import { Input } from "components/Input";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
@@ -17,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const ClassListPage = () => {
   const navigate = useNavigate();
+  const isAuthenticated = localStorage.getItem("token");
   const { data, loading } = useGetClass();
   const [time, setTime] = useState("all");
   const goToPage = (page) => {
@@ -31,13 +31,17 @@ const ClassListPage = () => {
     visible: false,
     data: undefined,
   });
-
+  
   const openClassModal = (data) => {
-    setDataClassModal({
-      ...dataClassModal,
-      visible: true,
-      data: data,
-    });
+    if (isAuthenticated) {
+      setDataClassModal({
+        ...dataClassModal,
+        visible: true,
+        data: data,
+      });
+    } else {
+      navigate("/login", { replace: true });
+    }
   };
 
   const [alert, setAlert] = useState({

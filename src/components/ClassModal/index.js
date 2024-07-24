@@ -1,31 +1,48 @@
-import { Form, Modal as ModalAntd } from "antd";
-import React, { useEffect } from "react";
+import { Form, Modal as ModalAntd, message } from "antd";
+import React, { useEffect, useState } from "react";
 
 import { ButtonPrimary } from "components/Button";
 import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import { Input } from "components/Input";
+import { SUBMIT_CLASS_URL } from "constant/paths";
 import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
+import twService from "utils/services";
 
 const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(false);
+
+  const onFinish = async (event) => {
+    setLoading(true);
+    try {
+      await twService.post(SUBMIT_CLASS_URL, event); // Replace with your API endpoint
+      closeModal();
+      setAlert({
+        ...alert,
+        visible: true,
+        message: "Pendaftaran kelas berhasil",
+      });
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content:
+          error?.response?.data?.message ||
+          "Terjadi kesalahan di sistem, silakan hubungi admin.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     form.setFieldsValue({
-      name: data?.name,
-      nik: "1927378021",
-      unit: "IT Development",
+      name: localStorage.getItem("name"),
+      nik: localStorage.getItem("nik"),
+      unit: localStorage.getItem("unit"),
     });
   }, [data, form, visible]);
-
-  const onFinish = () => {
-    closeModal();
-    setAlert({
-      ...alert,
-      visible: true,
-      message: "Pendaftaran kelas poundfit berhasil",
-    });
-  };
 
   const closeModal = () => {
     onClose();
@@ -39,6 +56,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
       onOk={closeModal}
       onCancel={closeModal}
     >
+      {contextHolder}
       <Wrapper>
         <LeftSide>
           <Image alt="photo" src={data?.img} />
@@ -113,7 +131,11 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
               <Input placeholder="Masukkan No. HP" />
             </Form.Item>
             <Form.Item>
-              <ButtonPrimary htmlType="submit" className="w-full h-[42px]">
+              <ButtonPrimary
+                htmlType="submit"
+                className="w-full h-[42px]"
+                loading={loading}
+              >
                 Kirim
               </ButtonPrimary>
             </Form.Item>
