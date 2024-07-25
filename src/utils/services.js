@@ -9,6 +9,7 @@ const twService = axios.create({
   timeout: 10000, // Request timeout
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
   },
 });
 

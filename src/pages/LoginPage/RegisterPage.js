@@ -1,10 +1,10 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Form, Input as InputAntd, message } from "antd";
+import { LOGIN_URL, REGISTER_URL } from "constant/paths";
 import React, { useState } from "react";
 
 import { ButtonPrimary } from "components/Button";
 import Capsule from "components/Capsule";
-import { REGISTER_URL } from "constant/paths";
 import styled from "styled-components";
 import twService from "utils/services";
 import { useAuth } from "contexts/AuthContext";
@@ -35,8 +35,31 @@ const RegisterSection = ({ toLogin }) => {
       password_confirmation: data?.password,
     };
     try {
-      const response = await twService.post(REGISTER_URL, payload); // Replace with your API endpoint
-      onRegister(response?.data?.accessToken);
+      await twService.post(REGISTER_URL, payload); // Replace with your API endpoint
+      onRegister(payload);
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content:
+          error?.response?.data?.message ||
+          "Terjadi kesalahan di sistem, silakan hubungi admin.",
+      });
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const onRegister = async (event) => {
+    setLoading(true);
+    let payload = {
+      email: event.email,
+      password: event.password,
+      remember: true,
+    };
+    try {
+      const response = await twService.post(LOGIN_URL, payload); // Replace with your API endpoint
+      login(response?.data?.access_token);
+      user && navigate("/beranda", { replace: true });
       localStorage.setItem("name", event?.name);
       localStorage.setItem("email", data?.email);
       localStorage.setItem("unit", data?.unit);
@@ -48,13 +71,10 @@ const RegisterSection = ({ toLogin }) => {
           error?.response?.data?.message ||
           "Terjadi kesalahan di sistem, silakan hubungi admin.",
       });
+      setLoading(false);
     } finally {
       setLoading(false);
     }
-  };
-  const onRegister = (event) => {
-    login(event);
-    user && navigate("/beranda", { replace: true });
   };
 
   const onValuesChange = () => {
