@@ -1,4 +1,4 @@
-export const BASE_URL = 'v1/portal/'
+export const BASE_URL = 'api/v1/portal/'
 export const LOGIN_URL = 'auth/login/'
 export const USER_PROFIL_URL = 'users/profile'
 export const REGISTER_URL = 'auth/register'
