@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { CLASS_LIST_URL } from "constant/paths";
+import { ON_GOING_URL } from "constant/paths";
 import twService from "utils/services";
 
-const useGetClass = (params) => {
+const useGetHistory = (params) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ const useGetClass = (params) => {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const response = await twService.get(CLASS_LIST_URL, {
+        const response = await twService.get(ON_GOING_URL, {
           params,
         });
         setData(response?.data?.data || []);
@@ -32,4 +32,4 @@ const useGetClass = (params) => {
   return { data, error, loading };
 };
 
-export default useGetClass;
+export default useGetHistory;

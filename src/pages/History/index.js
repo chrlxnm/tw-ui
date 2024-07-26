@@ -1,76 +1,80 @@
-import { Col, Row } from "antd";
+import { Col, Empty, Row, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 
 import Chip from "components/Chip/Chip";
 import HistoryCard from "./HistoryCard";
 import Tab from "./Tab";
 import styled from "styled-components";
+import useGetHistory from "./hooks/useGetHistory";
 
 const History = () => {
-  const [section, setSection] = useState("class");
-  const [status, setStatus] = useState("all");
+  const [params, setParams] = useState({
+    status: 'all',
+    section: 'class'
+  });
 
+  const onChangeParams = (name, value) => {
+    setParams({
+      ...params,
+      [name]: value
+    })
+  }
+
+  const { data, loading } = useGetHistory(params);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
-  
+
   return (
     <Wrapper>
       <Title>Riwayat Booking</Title>
-      <Tab section={section} setSection={setSection} />
+      <Tab section={params?.section} setSection={(e)=> onChangeParams('section', e)} />
       <ChipWrapper>
         <Chip
           label={"Semua"}
-          active={status === "all"}
-          onClick={() => setStatus("all")}
+          active={params.status === "all"}
+          onClick={() => onChangeParams('status', 'all')}
         />
         <Chip
           label={"Dibooking"}
-          active={status === "booked"}
-          onClick={() => setStatus("booked")}
+          active={params.status === "booked"}
+          onClick={() => onChangeParams('status', 'booked')}
         />
         <Chip
           label={"Menunggu Konfirmasi"}
-          active={status === "waitingforconfirm"}
-          onClick={() => setStatus("waitingforconfirm")}
+          active={params.status === "waitingforconfirm"}
+          onClick={() => onChangeParams('status', 'waitingforconfirm')}
         />
         <Chip
           label={"Sedang berlangsung"}
-          active={status === "inprogress"}
-          onClick={() => setStatus("inprogress")}
+          active={params.status === "inprogress"}
+          onClick={() => onChangeParams('status', 'inprogress')}
         />
         <Chip
           label={"Selesai"}
-          active={status === "done"}
-          onClick={() => setStatus("done")}
+          active={params.status === "done"}
+          onClick={() => onChangeParams('status', 'done')}
         />
         <Chip
           label={"Cancel"}
-          active={status === "cancel"}
-          onClick={() => setStatus("cancel")}
+          active={params.status === "cancel"}
+          onClick={() => onChangeParams('status', 'cancel')}
         />
       </ChipWrapper>
       <Row gutter={[16, 16]}>
         <Col span={24}>
-          <HistoryCard></HistoryCard>
-        </Col>
-        <Col span={24}>
-          <HistoryCard></HistoryCard>
-        </Col>
-        <Col span={24}>
-          <HistoryCard></HistoryCard>
-        </Col>
-        <Col span={24}>
-          <HistoryCard></HistoryCard>
-        </Col>
-        <Col span={24}>
-          <HistoryCard></HistoryCard>
-        </Col>
-        <Col span={24}>
-          <HistoryCard></HistoryCard>
-        </Col>
-        <Col span={24}>
-          <HistoryCard></HistoryCard>
+          {loading ? (
+            <Skeleton />
+          ) : (
+            data?.map((item) => (
+              <HistoryCard></HistoryCard>
+            ))
+          )}
+          {(data?.length === 0 && !loading) && (
+            <div className="flex justify-center w-full mt-[10%]">
+              <Empty />
+            </div>
+          )}
         </Col>
       </Row>
     </Wrapper>
@@ -86,8 +90,8 @@ const ChipWrapper = styled.div`
   gap: 16px;
   margin-bottom: 16px;
   text-wrap: nowrap;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `;
 
 const Wrapper = styled.div`

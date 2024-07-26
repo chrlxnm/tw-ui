@@ -1,4 +1,4 @@
-import { Col, Row, Skeleton } from "antd";
+import { Col, Empty, Row, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 
 import { ReactComponent as BackIcon } from "../../../assets/icons/back-icon.svg";
@@ -16,8 +16,9 @@ import { useNavigate } from "react-router-dom";
 
 const ClassListPage = () => {
   const navigate = useNavigate();
+  const [params, setParams] = useState({ name: "", date: undefined });
   const isAuthenticated = localStorage.getItem("token");
-  const { data, loading } = useGetClass();
+  const { data, loading } = useGetClass(params);
   const [time, setTime] = useState("all");
   const goToPage = (page) => {
     navigate(page, { replace: true });
@@ -31,7 +32,14 @@ const ClassListPage = () => {
     visible: false,
     data: undefined,
   });
-  
+
+  const onSearch = (name, event) => {
+    setParams({
+      ...params,
+      [name]: event.target.value,
+    });
+  };
+
   const openClassModal = (data) => {
     if (isAuthenticated) {
       setDataClassModal({
@@ -84,6 +92,7 @@ const ClassListPage = () => {
         size="large"
         placeholder="Cari sport class disini . . ."
         prefix={<SearchIcon />}
+        onChange={(e) => onSearch("name", e)}
       />
       <ChipWrapper>
         <Chip
@@ -112,6 +121,11 @@ const ClassListPage = () => {
             data?.map((item) => (
               <Card data={item} openModal={() => openClassModal(item)} />
             ))
+          )}
+          {(data?.length === 0 && !loading) && (
+            <div className="flex justify-center w-full">
+              <Empty />
+            </div>
           )}
         </Col>
         <Col xs={24} sm={24} md={24} lg={8} xl={8} xxl={8}>

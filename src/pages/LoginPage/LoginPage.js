@@ -41,7 +41,11 @@ const LoginPageSection = ({ toRegister }) => {
     login(event);
     try{
       const response = await twService.post(USER_PROFIL_URL);
-      localStorage.setItem("userProfile", response);
+      let data = response?.data;
+      localStorage.setItem("name", data?.name);
+      localStorage.setItem("email", data?.email);
+      localStorage.setItem("unit", data?.unit);
+      localStorage.setItem("nik", data?.nik);
     } catch(error) {
       console.error(error)
     }

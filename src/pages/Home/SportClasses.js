@@ -1,18 +1,26 @@
-import { Col, Input, Row, Skeleton } from "antd";
+import { Col, Empty, Input, Row, Skeleton } from "antd";
+import React, { useState } from "react";
 
 import { ButtonSecondary } from "components/Button";
 import ClassCard from "components/ClassCard";
-import React from "react";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
 import useGetClass from "./hooks/useGetClass";
 import { useNavigate } from "react-router-dom";
 
 const SportClasses = ({ openModal, idRef }) => {
-  const { data, loading } = useGetClass();
+  const [params, setParams] = useState({ name: "" });
+  const { data, loading } = useGetClass(params);
   const navigate = useNavigate();
   const goToPage = (page) => {
     navigate(page, { replace: true });
+  };
+
+  const onSearch = (event) => {
+      setParams({
+        ...params,
+        name: event.target.value,
+      });
   };
   return (
     <Wrapper ref={idRef}>
@@ -31,6 +39,7 @@ const SportClasses = ({ openModal, idRef }) => {
         </ButtonSecondary>
       </HeaderWrapper>
       <Input
+        onChange={onSearch}
         className="my-[16px] w-[40%]"
         size="large"
         placeholder="Cari sport class disini . . ."
@@ -41,10 +50,22 @@ const SportClasses = ({ openModal, idRef }) => {
       ) : (
         <Row gutter={[16, 16]}>
           {data?.map((item) => (
-            <Col className="gutter-row flex" xs={24} sm={24} md={12} lg={8} xl={8}>
+            <Col
+              className="gutter-row flex"
+              xs={24}
+              sm={24}
+              md={12}
+              lg={8}
+              xl={8}
+            >
               <ClassCard data={item} openModal={openModal} className="flex" />
             </Col>
           ))}
+          {(data?.length === 0 && !loading) && (
+            <div className="flex justify-center w-full">
+              <Empty />
+            </div>
+          )}
         </Row>
       )}
     </Wrapper>
