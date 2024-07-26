@@ -10,7 +10,6 @@ import React, { useState } from "react";
 import AlertBanner from "./Alert";
 import { ButtonPrimary } from "components/Button";
 import { Input } from "components/Input";
-import { SUBMIT_ROOM_URL } from "constant/paths";
 import { ReactComponent as Users } from "assets/icons/users.svg";
 import moment from "moment";
 import styled from "styled-components";
