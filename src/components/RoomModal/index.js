@@ -33,12 +33,12 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
       occupancy: Number(event.total),
     };
     try {
-      await twService.post(SUBMIT_ROOM_URL, payload); // Replace with your API endpoint
+      await twService.post(`rooms/${data?.id}`, payload); // Replace with your API endpoint
       closeModal();
       setAlert({
         ...alert,
         visible: true,
-        message: "Pendaftaran ruangan berhasil",
+        message: `Pendaftaran ruangan ${data?.name} berhasil`,
       });
     } catch (error) {
       messageApi.open({
@@ -69,11 +69,11 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
       onOk={closeModal}
       onCancel={closeModal}
     >
-      { contextHolder }
+      {contextHolder}
       <Wrapper>
         <LeftSide>
           <Image alt="photo" src={data?.img} />
-          <Title>{data?.title}</Title>
+          <Title>{data?.name}</Title>
           <BadgeWrapper>
             <GreyBadge>
               <Users />
@@ -206,7 +206,11 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
               />
             </Form.Item>
             <Form.Item>
-              <ButtonPrimary htmlType="submit" className="w-full h-[42px]" loading={loading}>
+              <ButtonPrimary
+                htmlType="submit"
+                className="w-full h-[42px]"
+                loading={loading}
+              >
                 Kirim
               </ButtonPrimary>
             </Form.Item>

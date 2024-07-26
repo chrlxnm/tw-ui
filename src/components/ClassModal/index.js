@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { ButtonPrimary } from "components/Button";
 import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import { Input } from "components/Input";
-import { SUBMIT_CLASS_URL } from "constant/paths";
 import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
 import twService from "utils/services";
@@ -17,7 +16,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
   const onFinish = async (event) => {
     setLoading(true);
     try {
-      await twService.post(SUBMIT_CLASS_URL, event); // Replace with your API endpoint
+      await twService.post(`schedules/${data?.id}/register`, event); // Replace with your API endpoint
       closeModal();
       setAlert({
         ...alert,
