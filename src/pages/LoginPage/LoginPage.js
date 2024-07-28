@@ -11,7 +11,6 @@ import { useAuth } from "contexts/AuthContext";
 const LoginPageSection = ({ toRegister }) => {
   const [form] = Form.useForm();
   const { login } = useAuth();
-  const [isDisabled, setIsDisabled] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -51,12 +50,6 @@ const LoginPageSection = ({ toRegister }) => {
     }
   };
 
-  const onValuesChange = () => {
-    const hasErrors = form
-      .getFieldsError()
-      .some(({ errors }) => errors.length > 0);
-    setIsDisabled(hasErrors);
-  };
 
   return (
     <LoginWrapper>
@@ -78,7 +71,6 @@ const LoginPageSection = ({ toRegister }) => {
           autoComplete="off"
           requiredMark={false}
           onFinish={loginService}
-          onFieldsChange={onValuesChange}
         >
           <Form.Item
             name="email"
@@ -88,6 +80,10 @@ const LoginPageSection = ({ toRegister }) => {
                 required: true,
                 message: "",
               },
+              {
+                type: 'email',
+                message: "Format email tidak valid!",
+              }
             ]}
           >
             <Input placeholder="Masukkan email" />
@@ -112,7 +108,6 @@ const LoginPageSection = ({ toRegister }) => {
               loading={isLoading}
               htmlType="submit"
               className="w-full h-[42px]"
-              disabled={isDisabled}
             >
               Lanjut
             </ButtonPrimary>

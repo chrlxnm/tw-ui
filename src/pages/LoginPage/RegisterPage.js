@@ -95,7 +95,7 @@ const RegisterSection = ({ toLogin }) => {
           </LogoWrapper>
           <Title>Register Wellness Portal</Title>
         </div>
-        <Capsule section={section} />
+        <Capsule section={section} setSection={setSection} />
         {section === "email" ? (
           <Form
             form={form}
@@ -113,6 +113,10 @@ const RegisterSection = ({ toLogin }) => {
                 {
                   required: true,
                   message: "",
+                },
+                {
+                  type: "email",
+                  message: "Format email tidak valid!",
                 },
               ]}
             >

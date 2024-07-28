@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Capsule = ({ section }) => {
+const Capsule = ({ section, setSection }) => {
   return (
     <Wrapper>
-      <Item className="left" active={section === "email"}>
+      <Item className="left" onClick={()=> setSection('email')} active={section === "email"}>
         <Circle active={section === "email"}>1</Circle>
         <Title active={section === "email"}>Email</Title>
       </Item>
@@ -37,6 +37,7 @@ const Item = styled.div`
   align-items: center;
   gap: 12px;
   width: 100%;
+  cursor: pointer;
   height: 36px;
   justify-content: center;
 `;

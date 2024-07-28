@@ -16,6 +16,14 @@ const LoginPage = () => {
     navigate(page, { replace: true });
   };
 
+  const onBack = () => {
+    if(section==="login"){
+      goToPage("/beranda")
+    } else {
+      setSection("login")
+    }
+  }
+
   return (
     <Wrapper>
       <LeftWrapper>
@@ -24,12 +32,18 @@ const LoginPage = () => {
             <BigTitle>Selamat datang, Rekans!</BigTitle>
             <Description>Tetap semangat dan selamat bekerja!</Description>
           </div>
-          <BigTitle>Mari semangat!</BigTitle>
-          <BigTitle>Bekerja</BigTitle>
+          <div className="grid w-[60%]">
+            <BigTitle>Selamat datang, Rekans!</BigTitle>
+            <Description>Tetap semangat dan selamat bekerja!</Description>
+          </div>
+          <div className="grid w-[60%]">
+            <BigTitle>Selamat datang, Rekans!</BigTitle>
+            <Description>Tetap semangat dan selamat bekerja!</Description>
+          </div>
         </Carousel>
       </LeftWrapper>
       <RightWrapper>
-        <div className="space" onClick={() => goToPage("/beranda")}>
+        <div className="space" onClick={onBack}>
           <BackIcon className="login-back-icon"></BackIcon>
           <p className="label-back">Kembali</p>
         </div>
