@@ -107,7 +107,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
             </Form.Item>
             <Form.Item
               label="Unit/Divisi"
-              name="unit"
+              name="unit_division"
               rules={[
                 {
                   required: true,
@@ -119,7 +119,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
             </Form.Item>
             <Form.Item
               label="No. HP"
-              name="phoneNo"
+              name="phone"
               rules={[
                 {
                   required: true,
