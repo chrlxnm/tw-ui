@@ -39,8 +39,8 @@ const LoginPageSection = ({ toRegister }) => {
   const onLogin = async (event) => {
     login(event);
     try{
-      const response = await twService.post(USER_PROFIL_URL);
-      let data = response?.data;
+      const response = await twService.get(USER_PROFIL_URL);
+      let data = response?.data?.data;
       localStorage.setItem("name", data?.name);
       localStorage.setItem("email", data?.email);
       localStorage.setItem("unit", data?.unit);

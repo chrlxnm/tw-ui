@@ -58,7 +58,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
       {contextHolder}
       <Wrapper>
         <LeftSide>
-          <Image alt="photo" src={data?.img} />
+          <Image alt="photo" src={data?.images?.[0]?.url} />
           <Date>{data?.date}</Date>
           <Title>{data?.title}</Title>
           <BadgeWrapper>
