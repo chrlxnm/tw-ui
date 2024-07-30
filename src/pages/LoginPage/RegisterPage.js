@@ -32,6 +32,7 @@ const RegisterSection = ({ toLogin }) => {
       email: data?.email,
       password: data?.password,
       nik: event?.nik,
+      unit_division : event?.unit_division ,
       password_confirmation: data?.password,
     };
     try {
@@ -62,7 +63,7 @@ const RegisterSection = ({ toLogin }) => {
       user && navigate("/beranda", { replace: true });
       localStorage.setItem("name", event?.name);
       localStorage.setItem("email", data?.email);
-      localStorage.setItem("unit", data?.unit);
+      localStorage.setItem("unit_division", data?.unit_division);
       localStorage.setItem("nik", event?.nik);
     } catch (error) {
       messageApi.open({
@@ -183,7 +184,7 @@ const RegisterSection = ({ toLogin }) => {
               <Input placeholder="Masukkan nik" />
             </Form.Item>
             <Form.Item
-              name="unit"
+              name="unit_division "
               label="Unit/Divisi"
               rules={[
                 {

@@ -39,7 +39,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
     form.setFieldsValue({
       name: localStorage.getItem("name"),
       nik: localStorage.getItem("nik"),
-      unit: localStorage.getItem("unit"),
+      unit_division: localStorage.getItem("unit_division"),
     });
   }, [data, form, visible]);
 

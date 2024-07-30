@@ -43,7 +43,7 @@ const LoginPageSection = ({ toRegister }) => {
       let data = response?.data?.data;
       localStorage.setItem("name", data?.name);
       localStorage.setItem("email", data?.email);
-      localStorage.setItem("unit", data?.unit);
+      localStorage.setItem("unit_division", data?.unit_division);
       localStorage.setItem("nik", data?.nik);
     } catch(error) {
       console.error(error)

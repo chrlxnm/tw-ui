@@ -25,7 +25,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
     let payload = {
       name: event.name,
       nik: event.nik,
-      unit_division: event.unit,
+      unit_division: event.unit_division,
       date: event.date,
       started_time: event.time,
       duration: event.duration,
@@ -116,7 +116,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
             </Form.Item>
             <Form.Item
               label="Unit/Divisi"
-              name="unit"
+              name="unit_division"
               rules={[
                 {
                   required: true,

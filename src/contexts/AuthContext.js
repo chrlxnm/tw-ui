@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("email");
-    localStorage.removeItem("unit");
+    localStorage.removeItem("unit_division");
     localStorage.removeItem("nik");
     setUser(null);
     navigate("/login", { replace: true });
