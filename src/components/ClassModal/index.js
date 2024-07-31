@@ -60,11 +60,11 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
         <LeftSide>
           <Image alt="photo" src={data?.images?.[0]?.url} />
           <Date>{data?.date}</Date>
-          <Title>{data?.title}</Title>
+          <Title>{data?.name}</Title>
           <BadgeWrapper>
             <GreyBadge>
               <Users />
-              Kuota {data?.kuota} orang
+              Kuota {data?.quota} orang
             </GreyBadge>
             <GreyBadge>
               <Clock />

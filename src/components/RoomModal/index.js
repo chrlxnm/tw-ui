@@ -71,7 +71,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
       {contextHolder}
       <Wrapper>
         <LeftSide>
-          <Image alt="photo" src={data?.img} />
+          <Image alt="photo" src={data?.images?.[0]?.url} />
           <Title>{data?.name}</Title>
           <BadgeWrapper>
             <GreyBadge>
