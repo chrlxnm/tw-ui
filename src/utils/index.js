@@ -17,6 +17,11 @@ export function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
+export function getThisMonth(){
+  const today = new Date();
+  return format(today, "yyyy-MM")
+}
+
 export function getFiveNextDay() {
   const today = new Date();
 
@@ -28,9 +33,15 @@ export function getFiveNextDay() {
     const nextDay = addDays(today, i);
     let formattedDate;
     if (i === 0) {
-      formattedDate = `Hari ini ${format(nextDay, "dd/MM", { locale: id })}`;
+      formattedDate = {
+        label: `Hari ini ${format(nextDay, "dd/MM", { locale: id })}`,
+        value: format(nextDay, "yyyy-MM-dd")
+      };
     } else {
-      formattedDate = format(nextDay, "eeee dd/MM", { locale: id });
+      formattedDate = {
+        label: format(nextDay, "eeee dd/MM", { locale: id }),
+        value: format(nextDay, "yyyy-MM-dd")
+      };
     }
     nextFiveDays.push(formattedDate);
   }

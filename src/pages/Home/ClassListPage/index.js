@@ -1,5 +1,6 @@
 import { Col, Empty, Row, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
+import { getFiveNextDay, getThisMonth } from "utils";
 
 import { ReactComponent as BackIcon } from "../../../assets/icons/back-icon.svg";
 import BookRoomBanner from "./RoomBanner";
@@ -9,7 +10,6 @@ import ClassModal from "components/ClassModal";
 import { Input } from "components/Input";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import TWAlert from "components/Alert";
-import { getFiveNextDay } from "utils";
 import styled from "styled-components";
 import useGetClass from "../hooks/useGetClass";
 import { useNavigate } from "react-router-dom";
@@ -19,10 +19,16 @@ const ClassListPage = () => {
   const [params, setParams] = useState({ name: "", date: undefined });
   const isAuthenticated = localStorage.getItem("token");
   const { data, loading } = useGetClass(params);
-  const [time, setTime] = useState("all");
   const goToPage = (page) => {
     navigate(page, { replace: true });
   };
+
+  function onChangeDate(date){
+    setParams({
+      ...params,
+      date: date
+    });
+  }
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -97,19 +103,19 @@ const ClassListPage = () => {
       <ChipWrapper>
         <Chip
           label={"Semua"}
-          active={time === "all"}
-          onClick={() => setTime("all")}
+          active={params.date === undefined}
+          onClick={() => onChangeDate(undefined)}
         />
         <Chip
           label={"Bulan ini"}
-          active={time === "Bulan ini"}
-          onClick={() => setTime("Bulan ini")}
+          active={params.date === getThisMonth()}
+          onClick={() => onChangeDate(getThisMonth())}
         />
         {getFiveNextDay().map((item) => (
           <Chip
-            label={item}
-            active={time === item}
-            onClick={() => setTime(item)}
+            label={item?.label}
+            active={params.date === item?.value}
+            onClick={() => onChangeDate(item?.value)}
           />
         ))}
       </ChipWrapper>
