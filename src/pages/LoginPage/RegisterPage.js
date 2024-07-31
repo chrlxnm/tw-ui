@@ -32,7 +32,7 @@ const RegisterSection = ({ toLogin }) => {
       email: data?.email,
       password: data?.password,
       nik: event?.nik,
-      unit_division : event?.unit_division ,
+      unit_division : event?.unit_division,
       password_confirmation: data?.password,
     };
     try {
@@ -184,7 +184,7 @@ const RegisterSection = ({ toLogin }) => {
               <Input placeholder="Masukkan nik" />
             </Form.Item>
             <Form.Item
-              name="unit_division "
+              name="unit_division"
               label="Unit/Divisi"
               rules={[
                 {
