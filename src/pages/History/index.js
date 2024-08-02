@@ -9,6 +9,7 @@ import useGetHistory from "./hooks/useGetHistory";
 
 const History = () => {
   const [params, setParams] = useState({
+    nik: localStorage.getItem('nik'),
     status: 'all',
     section: 'class'
   });

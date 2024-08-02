@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const RoomCard = ({data}) => {
   return (
     <Wrapper>
-      <img src={data?.images?.[0]?.url} alt='icon' />
+      <img src={data?.icon} alt='icon' />
         <Title>
         {data?.name}
         </Title>
