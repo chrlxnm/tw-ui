@@ -12,9 +12,11 @@ const useGetHistory = (params) => {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const response = await twService.get(ON_GOING_URL, {
-          params,
-        });
+        const response = await twService.get(
+          `user/${
+            params?.section === "class" ? "schedules" : "rooms"
+          }/bookings`
+        );
         setData(response?.data?.data || []);
       } catch (error) {
         setError(error);
