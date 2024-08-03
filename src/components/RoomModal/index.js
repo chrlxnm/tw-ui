@@ -27,7 +27,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
       name: event.name,
       nik: event.nik,
       unit_division: event.unit_division,
-      date: event.date,
+      date: event.date?.format("YYYY-MM-DD"),
       started_time: event.time,
       duration: event.duration,
       occupancy: Number(event.total),
