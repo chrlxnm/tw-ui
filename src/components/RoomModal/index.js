@@ -19,6 +19,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
+  const [timeList, setTimeList] = useState([]);
 
   const onFinish = async (event) => {
     setLoading(true);
@@ -39,6 +40,36 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
         visible: true,
         message: `Pendaftaran ruangan ${data?.name} berhasil`,
       });
+    } catch (error) {
+      messageApi.open({
+        type: "error",
+        content:
+          error?.response?.data?.message ||
+          "Terjadi kesalahan di sistem, silakan hubungi admin.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const checkAvailability = async (event) => {
+    let params = {
+      date: event ? event.format("YYYY-MM-DD") : undefined,
+    };
+    setLoading(true);
+    try {
+      let response = await twService.get(`rooms/${data?.id}/available`, {
+        params,
+      });
+
+      const formattedTimeSlots = Object.keys(response?.data?.data).map(
+        (time) => ({
+          label: time,
+          value: time,
+          disabled: response?.data?.data[time] === 0,
+        })
+      );
+      setTimeList(formattedTimeSlots);
     } catch (error) {
       messageApi.open({
         type: "error",
@@ -141,6 +172,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
                 size="large"
                 style={{ width: "100%" }}
                 disabledDate={disableDate}
+                onChange={checkAvailability}
               />
             </Form.Item>
             <Form.Item
@@ -156,12 +188,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
               <Select
                 size="large"
                 placeholder="Pilih waktu mulai"
-                options={[
-                  { value: "11:00", label: "11:00" },
-                  { value: "12:00", label: "12:00" },
-                  { value: "13:00", label: "13:00" },
-                  { value: "14:00", label: "14:00", disabled: true },
-                ]}
+                options={timeList}
               />
             </Form.Item>
             <Form.Item
