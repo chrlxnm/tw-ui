@@ -2,6 +2,7 @@ import { ButtonPrimary } from "components/Button";
 import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
+import { formatDateWithDayName } from "utils";
 import styled from "styled-components";
 
 const Card = ({ data, openModal }) => {
@@ -11,7 +12,7 @@ const Card = ({ data, openModal }) => {
         <ContentWrapper>
           <Image src={data?.images?.[0]?.url} alt="photo" />
           <TitleWrapper>
-            <Date>{data?.date || "-"}</Date>
+            <Date>{formatDateWithDayName(data?.date)}</Date>
             <Title>{data?.name || "-"}</Title>
             <JoinedDesc>
               {data?.registered || "0"} orang sudah mendaftar

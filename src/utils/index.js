@@ -1,4 +1,4 @@
-import { addDays, format } from "date-fns";
+import { addDays, format, parse } from "date-fns";
 
 import { id } from "date-fns/locale";
 
@@ -46,4 +46,24 @@ export function getFiveNextDay() {
     nextFiveDays.push(formattedDate);
   }
   return nextFiveDays;
+}
+
+export function formatDateWithDayName(date){
+  try {
+    // Parse the date string
+    const parsedDate = parse(date, 'yyyy-MM-dd', new Date());
+
+    // Check if the parsed date is valid
+    if (isNaN(parsedDate)) {
+      throw new Error('Invalid date');
+    }
+
+    // Format the parsed date
+    const formattedDate = format(parsedDate, 'eeee, dd MMMM yyyy', { locale: id });
+
+    return formattedDate;
+  } catch (error) {
+    console.error('Error formatting date:', error.message);
+    return '';
+  }
 }

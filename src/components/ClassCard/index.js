@@ -2,6 +2,7 @@ import { ButtonPrimary } from "components/Button";
 import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
+import { formatDateWithDayName } from "utils";
 import styled from "styled-components";
 
 const ClassCard = ({ openModal, data }) => {
@@ -9,7 +10,7 @@ const ClassCard = ({ openModal, data }) => {
     <Wrapper>
       <Image alt="image" src={data?.images?.[0]?.url} />
       <ContentWrapper>
-        <TextDate>{data?.date}</TextDate>
+        <TextDate>{formatDateWithDayName(data?.date)}</TextDate>
         <TextTitle>{data?.name}</TextTitle>
         <BadgeWrapper>
           <Badge>

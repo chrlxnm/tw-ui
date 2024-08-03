@@ -17,10 +17,10 @@ const SportClasses = ({ openModal, idRef }) => {
   };
 
   const onSearch = (event) => {
-      setParams({
-        ...params,
-        name: event.target.value,
-      });
+    setParams({
+      ...params,
+      name: event.target.value,
+    });
   };
   return (
     <Wrapper ref={idRef}>
@@ -51,6 +51,7 @@ const SportClasses = ({ openModal, idRef }) => {
         <Row gutter={[16, 16]}>
           {data?.map((item) => (
             <Col
+              key={item?.id}
               className="gutter-row flex"
               xs={24}
               sm={24}
@@ -61,7 +62,7 @@ const SportClasses = ({ openModal, idRef }) => {
               <ClassCard data={item} openModal={openModal} className="flex" />
             </Col>
           ))}
-          {(data?.length === 0 && !loading) && (
+          {data?.length === 0 && !loading && (
             <div className="flex justify-center w-full">
               <Empty />
             </div>

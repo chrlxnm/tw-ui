@@ -16,6 +16,7 @@ const BookRoomSection = ({ openModal, idRef }) => {
         <Row gutter={[16, 16]}>
           {data?.map((item) => (
             <Col
+              key={item?.id}
               xs={24}
               sm={24}
               md={8}
