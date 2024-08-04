@@ -23,7 +23,7 @@ const HistoryCard = ({ data }) => {
         </BadgeWrapper>
       </Item>
       <RightSideWrapper>
-        <Badge>{data?.schedule?.status?.toUpperCase() || data?.status?.toUpperCase()}</Badge>
+        <Badge>{data?.status?.toUpperCase()}</Badge>
         {data?.status === "Ongoing" && (
           <ButtonPrimary>Selesai</ButtonPrimary>
         )}
