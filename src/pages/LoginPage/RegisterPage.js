@@ -62,8 +62,8 @@ const RegisterSection = ({ toLogin }) => {
       login(response?.data?.access_token);
       user && navigate("/beranda", { replace: true });
       localStorage.setItem("name", event?.name);
-      localStorage.setItem("email", data?.email);
-      localStorage.setItem("unit_division", data?.unit_division);
+      localStorage.setItem("email", event?.email);
+      localStorage.setItem("unit_division", event?.unit_division);
       localStorage.setItem("nik", event?.nik);
     } catch (error) {
       messageApi.open({

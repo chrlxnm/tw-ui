@@ -22,6 +22,7 @@ const History = () => {
   }
 
   const { data, loading } = useGetHistory(params);
+  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
@@ -68,7 +69,7 @@ const History = () => {
             <Skeleton />
           ) : (
             data?.map((item) => (
-              <HistoryCard></HistoryCard>
+              <HistoryCard data={item}></HistoryCard>
             ))
           )}
           {(data?.length === 0 && !loading) && (

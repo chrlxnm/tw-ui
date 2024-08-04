@@ -2,28 +2,31 @@ import { ButtonPrimary } from "components/Button";
 import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
+import { formatDateWithDayName } from "utils";
 import styled from "styled-components";
 
-const HistoryCard = (props) => {
+const HistoryCard = ({ data }) => {
   return (
     <Wrapper>
       <Item>
-        <Title>Poundfit</Title>
-        <Date>Senin, 27 Mei 2024</Date>
-          <BadgeWrapper>
-            <GreyBadge>
-              <Users />
-              Kuota 20 orang
-            </GreyBadge>
-            <GreyBadge>
-              <Clock />
-              16.00-17.00
-            </GreyBadge>
-          </BadgeWrapper>
+        <Title>{data?.schedule?.name}</Title>
+        <Date>{formatDateWithDayName(data?.schedule?.date)}</Date>
+        <BadgeWrapper>
+          <GreyBadge>
+            <Users />
+            Kuota {data?.schedule?.quota} orang
+          </GreyBadge>
+          <GreyBadge>
+            <Clock />
+            {data?.schedule?.time}
+          </GreyBadge>
+        </BadgeWrapper>
       </Item>
       <RightSideWrapper>
-        <Badge>Dibooking</Badge>
-        <ButtonPrimary>Selesai</ButtonPrimary>
+        <Badge>{data?.schedule?.status?.toUpperCase()}</Badge>
+        {data?.schedule?.status === "Ongoing" && (
+          <ButtonPrimary>Selesai</ButtonPrimary>
+        )}
       </RightSideWrapper>
     </Wrapper>
   );

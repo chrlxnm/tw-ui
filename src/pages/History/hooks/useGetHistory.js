@@ -17,7 +17,7 @@ const useGetHistory = (params) => {
             params?.section === "class" ? "schedules" : "rooms"
           }/bookings`
         );
-        setData(response?.data?.data || []);
+        setData(response?.data || []);
       } catch (error) {
         setError(error);
       } finally {
