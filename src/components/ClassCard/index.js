@@ -22,8 +22,28 @@ const ClassCard = ({ openModal, data }) => {
             {data?.time}
           </Badge>
         </BadgeWrapper>
-        <JoinedText>{data?.participants || 0} orang sudah mendaftar</JoinedText>
-        <ButtonPrimary className="mt-[16px]" onClick={() => openModal(data)}>Join Class</ButtonPrimary>
+        {data?.participants < data?.quota ? (
+          <div className="grid gap-[8px]">
+            <JoinedText>
+              {data?.participants || 0} orang sudah mendaftar
+            </JoinedText>
+            <ButtonPrimary
+              className="mt-[16px]"
+              onClick={() => openModal(data)}
+            >
+              Join Class
+            </ButtonPrimary>
+          </div>
+        ) : (
+          <div className="grid gap-[8px]">
+            <FullText>
+              Kuota sudah habis. Bergabunglah ke dalam daftar tunggu.
+            </FullText>
+            <ButtonPrimary className="mt-[16px]">
+              Join Waiting List
+            </ButtonPrimary>
+          </div>
+        )}
       </ContentWrapper>
     </Wrapper>
   );
@@ -87,7 +107,7 @@ const Badge = styled.div`
   background: #f2f2f2;
   color: #535353;
   width: fit-content;
-  
+
   @media only screen and (max-width: 480px) {
     font-size: 12px;
   }
@@ -98,6 +118,13 @@ const JoinedText = styled.p`
   font-style: italic;
   font-weight: 400;
   color: #535353;
+`;
+
+const FullText = styled.p`
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  color: red;
 `;
 
 const ContentWrapper = styled.div`

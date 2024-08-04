@@ -1,8 +1,9 @@
+import { formatDateWithDayName, getStatusOnGoing } from "utils";
+
 import { ButtonPrimary } from "components/Button";
 import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
-import { formatDateWithDayName } from "utils";
 import styled from "styled-components";
 
 const HistoryCard = ({ data }) => {
@@ -23,8 +24,8 @@ const HistoryCard = ({ data }) => {
         </BadgeWrapper>
       </Item>
       <RightSideWrapper>
-        <Badge>{data?.status?.toUpperCase()}</Badge>
-        {data?.status === "Ongoing" && (
+        <Badge>{getStatusOnGoing(data?.status?.toLowerCase())}</Badge>
+        {data?.status?.toLowerCase() === "ongoing" && (
           <ButtonPrimary>Selesai</ButtonPrimary>
         )}
       </RightSideWrapper>

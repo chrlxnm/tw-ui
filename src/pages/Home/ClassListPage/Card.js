@@ -14,9 +14,15 @@ const Card = ({ data, openModal }) => {
           <TitleWrapper>
             <Date>{formatDateWithDayName(data?.date)}</Date>
             <Title>{data?.name || "-"}</Title>
-            <JoinedDesc>
-              {data?.participants || "0"} orang sudah mendaftar
-            </JoinedDesc>
+            {data?.participants < data?.quota ? (
+              <JoinedDesc>
+                {data?.participants || "0"} orang sudah mendaftar
+              </JoinedDesc>
+            ) : (
+              <FullText>
+                Kuota sudah habis. Bergabunglah ke dalam daftar tunggu.
+              </FullText>
+            )}
           </TitleWrapper>
         </ContentWrapper>
         <BadgeWrapper>
@@ -31,7 +37,11 @@ const Card = ({ data, openModal }) => {
         </BadgeWrapper>
       </LeftWrapper>
       <RightWrapper>
-        <ButtonPrimary onClick={openModal}>Join Class</ButtonPrimary>
+        {data?.participants < data?.quota ? (
+          <ButtonPrimary onClick={openModal}>Join Class</ButtonPrimary>
+        ) : (
+          <ButtonPrimary onClick={openModal}>Join Waiting List</ButtonPrimary>
+        )}
       </RightWrapper>
     </Wrapper>
   );
@@ -127,4 +137,11 @@ const GreyBadge = styled.div`
   @media screen and (max-width: 768px) {
     width: 100%;
   }
+`;
+
+const FullText = styled.p`
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  color: red;
 `;

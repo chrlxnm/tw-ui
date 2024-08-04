@@ -9,20 +9,20 @@ import useGetHistory from "./hooks/useGetHistory";
 
 const History = () => {
   const [params, setParams] = useState({
-    nik: localStorage.getItem('nik'),
-    status: 'all',
-    section: 'class'
+    nik: localStorage.getItem("nik"),
+    status: "all",
+    section: "class",
   });
 
   const onChangeParams = (name, value) => {
     setParams({
       ...params,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const { data, loading } = useGetHistory(params);
-  
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
@@ -30,54 +30,57 @@ const History = () => {
   return (
     <Wrapper>
       <Title>Riwayat Booking</Title>
-      <Tab section={params?.section} setSection={(e)=> onChangeParams('section', e)} />
+      <Tab
+        section={params?.section}
+        setSection={(e) => onChangeParams("section", e)}
+      />
       <ChipWrapper>
         <Chip
           label={"Semua"}
           active={params.status === "all"}
-          onClick={() => onChangeParams('status', 'all')}
+          onClick={() => onChangeParams("status", "all")}
         />
         <Chip
           label={"Dibooking"}
-          active={params.status === "booked"}
-          onClick={() => onChangeParams('status', 'booked')}
+          active={params.status === "approved"}
+          onClick={() => onChangeParams("status", "approved")}
         />
         <Chip
           label={"Menunggu Konfirmasi"}
-          active={params.status === "waitingforconfirm"}
-          onClick={() => onChangeParams('status', 'waitingforconfirm')}
+          active={params.status === "submitted"}
+          onClick={() => onChangeParams("status", "submitted")}
         />
         <Chip
           label={"Sedang berlangsung"}
-          active={params.status === "inprogress"}
-          onClick={() => onChangeParams('status', 'inprogress')}
+          active={params.status === "ongoing"}
+          onClick={() => onChangeParams("status", "ongoing")}
         />
         <Chip
           label={"Selesai"}
-          active={params.status === "done"}
-          onClick={() => onChangeParams('status', 'done')}
+          active={params.status === "finished"}
+          onClick={() => onChangeParams("status", "finished")}
         />
         <Chip
           label={"Cancel"}
-          active={params.status === "cancel"}
-          onClick={() => onChangeParams('status', 'cancel')}
+          active={params.status === "cancelled"}
+          onClick={() => onChangeParams("status", "cancelled")}
         />
       </ChipWrapper>
       <Row gutter={[16, 16]}>
-        <Col span={24}>
-          {loading ? (
-            <Skeleton />
-          ) : (
-            data?.map((item) => (
+        {loading ? (
+          <Skeleton />
+        ) : (
+          data?.map((item) => (
+            <Col span={24}>
               <HistoryCard data={item}></HistoryCard>
-            ))
-          )}
-          {(data?.length === 0 && !loading) && (
-            <div className="flex justify-center w-full mt-[10%]">
-              <Empty />
-            </div>
-          )}
-        </Col>
+            </Col>
+          ))
+        )}
+        {data?.length === 0 && !loading && (
+          <div className="flex justify-center w-full mt-[10%]">
+            <Empty />
+          </div>
+        )}
       </Row>
     </Wrapper>
   );

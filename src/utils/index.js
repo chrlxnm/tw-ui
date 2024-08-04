@@ -17,9 +17,9 @@ export function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
-export function getThisMonth(){
+export function getThisMonth() {
   const today = new Date();
-  return format(today, "yyyy-MM")
+  return format(today, "yyyy-MM");
 }
 
 export function getFiveNextDay() {
@@ -35,12 +35,12 @@ export function getFiveNextDay() {
     if (i === 0) {
       formattedDate = {
         label: `Hari ini ${format(nextDay, "dd/MM", { locale: id })}`,
-        value: format(nextDay, "yyyy-MM-dd")
+        value: format(nextDay, "yyyy-MM-dd"),
       };
     } else {
       formattedDate = {
         label: format(nextDay, "eeee dd/MM", { locale: id }),
-        value: format(nextDay, "yyyy-MM-dd")
+        value: format(nextDay, "yyyy-MM-dd"),
       };
     }
     nextFiveDays.push(formattedDate);
@@ -48,22 +48,38 @@ export function getFiveNextDay() {
   return nextFiveDays;
 }
 
-export function formatDateWithDayName(date){
+export function formatDateWithDayName(date) {
   try {
     // Parse the date string
-    const parsedDate = parse(date, 'yyyy-MM-dd', new Date());
+    const parsedDate = parse(date, "yyyy-MM-dd", new Date());
 
     // Check if the parsed date is valid
     if (isNaN(parsedDate)) {
-      throw new Error('Invalid date');
+      throw new Error("Invalid date");
     }
 
     // Format the parsed date
-    const formattedDate = format(parsedDate, 'eeee, dd MMMM yyyy', { locale: id });
+    const formattedDate = format(parsedDate, "eeee, dd MMMM yyyy", {
+      locale: id,
+    });
 
     return formattedDate;
   } catch (error) {
-    console.error('Error formatting date:', error.message);
-    return '';
+    console.error("Error formatting date:", error.message);
+    return "";
   }
+}
+
+const reverseStatusMapping = {
+  all: "Semua",
+  approved: "Dibooking",
+  submitted: "Menunggu Konfirmasi",
+  ongoing: "Sedang berlangsung",
+  finished: "Selesai",
+  cancelled: "Cancel",
+};
+
+// Function to get the Indonesian status, with default handling
+export function getStatusOnGoing(englishStatus) {
+  return reverseStatusMapping[englishStatus] || "Dibooking"; // "Status not found" in Indonesian
 }
