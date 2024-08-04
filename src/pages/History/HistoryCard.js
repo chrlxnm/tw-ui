@@ -9,22 +9,22 @@ const HistoryCard = ({ data }) => {
   return (
     <Wrapper>
       <Item>
-        <Title>{data?.schedule?.name}</Title>
-        <Date>{formatDateWithDayName(data?.schedule?.date)}</Date>
+        <Title>{data?.schedule?.name || data?.room?.name}</Title>
+        <Date>{formatDateWithDayName(data?.schedule?.date || data?.date)}</Date>
         <BadgeWrapper>
           <GreyBadge>
             <Users />
-            Kuota {data?.schedule?.quota} orang
+            Kuota {data?.schedule?.quota || data?.room?.quota} orang
           </GreyBadge>
           <GreyBadge>
             <Clock />
-            {data?.schedule?.time}
+            {data?.schedule?.time || data?.time}
           </GreyBadge>
         </BadgeWrapper>
       </Item>
       <RightSideWrapper>
-        <Badge>{data?.schedule?.status?.toUpperCase()}</Badge>
-        {data?.schedule?.status === "Ongoing" && (
+        <Badge>{data?.schedule?.status?.toUpperCase() || data?.status?.toUpperCase()}</Badge>
+        {data?.status === "Ongoing" && (
           <ButtonPrimary>Selesai</ButtonPrimary>
         )}
       </RightSideWrapper>
