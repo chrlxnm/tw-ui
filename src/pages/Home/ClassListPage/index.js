@@ -18,7 +18,7 @@ const ClassListPage = () => {
   const navigate = useNavigate();
   const [params, setParams] = useState({ name: "", date: undefined });
   const isAuthenticated = localStorage.getItem("token");
-  const { data, loading } = useGetClass(params);
+  const { data, loading, fetchData } = useGetClass(params);
   const goToPage = (page) => {
     navigate(page, { replace: true });
   };
@@ -81,6 +81,7 @@ const ClassListPage = () => {
         visible={dataClassModal?.visible}
         data={dataClassModal?.data}
         onClose={() => setDataClassModal({ ...dataClassModal, visible: false })}
+        refetch={fetchData}
       />
       <BackWrapper onClick={() => goToPage("/beranda")}>
         <BackIcon className="login-back-icon"></BackIcon>
