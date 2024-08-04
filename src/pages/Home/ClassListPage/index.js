@@ -178,6 +178,7 @@ const BackWrapper = styled.div`
   gap: 8px;
   margin-bottom: 36px;
   align-items: center;
+  cursor: pointer;
 `;
 
 const HeaderTextWrapper = styled.div`

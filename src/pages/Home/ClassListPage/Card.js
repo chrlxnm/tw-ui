@@ -15,7 +15,7 @@ const Card = ({ data, openModal }) => {
             <Date>{formatDateWithDayName(data?.date)}</Date>
             <Title>{data?.name || "-"}</Title>
             <JoinedDesc>
-              {data?.registered || "0"} orang sudah mendaftar
+              {data?.participants || "0"} orang sudah mendaftar
             </JoinedDesc>
           </TitleWrapper>
         </ContentWrapper>
