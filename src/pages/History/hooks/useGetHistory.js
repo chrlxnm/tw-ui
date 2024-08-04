@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { ON_GOING_URL } from "constant/paths";
 import twService from "utils/services";
 
 const useGetHistory = (params) => {
@@ -15,7 +14,11 @@ const useGetHistory = (params) => {
         const response = await twService.get(
           `user/${
             params?.section === "class" ? "schedules" : "rooms"
-          }/bookings`
+          }/bookings`, {
+            params: {
+              status: params?.status
+            }
+          }
         );
         setData(response?.data || []);
       } catch (error) {
