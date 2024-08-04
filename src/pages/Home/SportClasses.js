@@ -3,17 +3,36 @@ import React, { useState } from "react";
 
 import { ButtonSecondary } from "components/Button";
 import ClassCard from "components/ClassCard";
+import ClassModal from "components/ClassModal";
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 import styled from "styled-components";
 import useGetClass from "./hooks/useGetClass";
 import { useNavigate } from "react-router-dom";
 
-const SportClasses = ({ openModal, idRef }) => {
+const SportClasses = ({ idRef, setAlert }) => {
+  const isAuthenticated = localStorage.getItem("token");
   const [params, setParams] = useState({ name: "" });
-  const { data, loading } = useGetClass(params);
+  const { data, loading, fetchData } = useGetClass(params);
   const navigate = useNavigate();
   const goToPage = (page) => {
     navigate(page, { replace: true });
+  };
+  
+  const [dataClassModal, setDataClassModal] = useState({
+    visible: false,
+    data: undefined,
+  });
+
+  const openModal = (data) => {
+    if (isAuthenticated) {
+      setDataClassModal({
+        ...dataClassModal,
+        visible: true,
+        data: data,
+      });
+    } else {
+      navigate("/login", { replace: true });
+    }
   };
 
   const onSearch = (event) => {
@@ -24,6 +43,14 @@ const SportClasses = ({ openModal, idRef }) => {
   };
   return (
     <Wrapper ref={idRef}>
+      <ClassModal
+        alert={alert}
+        setAlert={setAlert}
+        visible={dataClassModal?.visible}
+        data={dataClassModal?.data}
+        onClose={() => setDataClassModal({ ...dataClassModal, visible: false })}
+        refetch={fetchData}
+      />
       <HeaderWrapper>
         <HeaderTextWrapper>
           <HeaderTitle>Sport Classes</HeaderTitle>

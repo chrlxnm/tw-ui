@@ -8,7 +8,7 @@ import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
 import twService from "utils/services";
 
-const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
+const ClassModal = ({ data, visible, onClose, setAlert, alert, refetch }) => {
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
@@ -17,6 +17,7 @@ const ClassModal = ({ data, visible, onClose, setAlert, alert }) => {
     setLoading(true);
     try {
       await twService.post(`schedules/${data?.id}/register`, event); // Replace with your API endpoint
+      refetch();
       closeModal();
       setAlert({
         ...alert,

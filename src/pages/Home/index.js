@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BannerSection from "./BannerSection";
 import BookRoomBanner from "./BookRoomBanner";
 import BookRoomSection from "./BookRoomSection";
-import ClassModal from "components/ClassModal";
 import RoomModal from "components/RoomModal";
 import SportClasses from "./SportClasses";
 import TWAlert from "components/Alert";
@@ -14,10 +13,6 @@ import styled from "styled-components";
 
 const Home = () => {
   const isAuthenticated = localStorage.getItem("token");
-  const [dataClassModal, setDataClassModal] = useState({
-    visible: false,
-    data: undefined,
-  });
   const [dataRoomModal, setDataRoomModal] = useState({
     visible: false,
     data: undefined,
@@ -51,18 +46,7 @@ const Home = () => {
     }
   }
   const navigate = useNavigate();
-
-  const openClassModal = (data) => {
-    if (isAuthenticated) {
-      setDataClassModal({
-        ...dataClassModal,
-        visible: true,
-        data: data,
-      });
-    } else {
-      navigate("/login", { replace: true });
-    }
-  };
+  
   const openRoomModal = (data) => {
     if (isAuthenticated) {
       setDataRoomModal({
@@ -93,15 +77,6 @@ const Home = () => {
             })
           }
         />
-        <ClassModal
-          alert={alert}
-          setAlert={setAlert}
-          visible={dataClassModal?.visible}
-          data={dataClassModal?.data}
-          onClose={() =>
-            setDataClassModal({ ...dataClassModal, visible: false })
-          }
-        />
         <RoomModal
           alert={alert}
           setAlert={setAlert}
@@ -111,7 +86,7 @@ const Home = () => {
         />
         <BannerSection />
         {/* {isAuthenticated && <OnGoing />} */}
-        <SportClasses idRef={classRef} openModal={openClassModal} />
+        <SportClasses idRef={classRef} setAlert={setAlert} />
         <BookRoomBanner goToRoom={() => goToRoomSection()} />
         <BookRoomSection idRef={roomRef} openModal={openRoomModal} />
       </HomeWrapper>

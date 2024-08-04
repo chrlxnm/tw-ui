@@ -24,7 +24,7 @@ const HistoryCard = ({ data }) => {
         </BadgeWrapper>
       </Item>
       <RightSideWrapper>
-        <Badge>{getStatusOnGoing(data?.status?.toLowerCase())}</Badge>
+        <Badge color={data?.status?.toString()?.toLowerCase()}>{getStatusOnGoing(data?.status?.toLowerCase())}</Badge>
         {data?.status?.toLowerCase() === "ongoing" && (
           <ButtonPrimary>Selesai</ButtonPrimary>
         )}
@@ -47,13 +47,52 @@ const Wrapper = styled.div`
   }
 `;
 
+
+const getBgColor = ({ color }) => {
+  switch (color?.toString()?.toLowerCase()) {
+    case "submitted":
+      return "#FFF3E6";
+    case "approved":
+      return "#E9F1FC";
+    case "cancelled":
+      return "#FFEBEB";
+    case "finished":
+      return "#DEFFE3";
+    case "ongoing":
+      return "#E9E9E9";
+    case "rejected":
+      return "#FFEBEB";
+    default:
+      return "#E6F7EF";
+  }
+};
+
+const getColor = ({ color }) => {
+  switch (color?.toString()?.toLowerCase()) {
+    case "submitted":
+      return "#E67800";
+    case "approved":
+      return "#246EE5";
+    case "cancelled":
+      return "#FF0000";
+    case "finished":
+      return "#0FE131";
+    case "ongoing":
+      return "#646464";
+    case "rejected":
+      return "#FF0000";
+    default:
+      return "#00AA5B";
+  }
+};
+
 const Badge = styled.div`
   font-weight: 700;
   font-size: 16px;
   padding: 4px 8px;
   border-radius: 4px;
-  background: #e9f1fc;
-  color: #246ee5;
+  color: ${getColor};
+  background: ${getBgColor};
   height: fit-content;
   width: fit-content;
 `;

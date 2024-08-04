@@ -73,6 +73,7 @@ export function formatDateWithDayName(date) {
 const reverseStatusMapping = {
   all: "Semua",
   approved: "Dibooking",
+  rejected: "Ditolak",
   submitted: "Menunggu Konfirmasi",
   ongoing: "Sedang berlangsung",
   finished: "Selesai",
@@ -80,6 +81,6 @@ const reverseStatusMapping = {
 };
 
 // Function to get the Indonesian status, with default handling
-export function getStatusOnGoing(englishStatus) {
-  return reverseStatusMapping[englishStatus] || "Dibooking"; // "Status not found" in Indonesian
+export function getStatusOnGoing(status) {
+  return reverseStatusMapping[status] || status; // "Status not found" in Indonesian
 }
