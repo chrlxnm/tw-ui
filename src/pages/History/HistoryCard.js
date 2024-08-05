@@ -1,30 +1,50 @@
 import { formatDateWithDayName, getStatusOnGoing } from "utils";
 
 import { ButtonPrimary } from "components/Button";
+import { CalendarOutlined } from "@ant-design/icons";
 import { ReactComponent as Clock } from "assets/icons/clock.svg";
 import React from "react";
 import { ReactComponent as Users } from "assets/icons/users.svg";
 import styled from "styled-components";
 
-const HistoryCard = ({ data }) => {
+const HistoryCard = ({ data, section }) => {
   return (
     <Wrapper>
       <Item>
-        <Title>{data?.schedule?.name || data?.room?.name}</Title>
+        <Title>{data?.schedule?.name || data?.room?.name || "-"}</Title>
         <Date>{formatDateWithDayName(data?.schedule?.date || data?.date)}</Date>
-        <BadgeWrapper>
-          <GreyBadge>
-            <Users />
-            Kuota {data?.schedule?.quota || data?.room?.quota} orang
-          </GreyBadge>
-          <GreyBadge>
-            <Clock />
-            {data?.schedule?.time || data?.time}
-          </GreyBadge>
-        </BadgeWrapper>
+        {section === "class" ? (
+          <BadgeWrapper>
+            <GreyBadge>
+              <Users />
+              Kuota {data?.schedule?.quota || data?.room?.quota} orang
+            </GreyBadge>
+            <GreyBadge>
+              <Clock />
+              {data?.schedule?.time || data?.time}
+            </GreyBadge>
+          </BadgeWrapper>
+        ) : (
+          <BadgeWrapper>
+            <GreyBadge>
+              <Users />
+              Jumlah Peserta {data?.occupancy} orang
+            </GreyBadge>
+            <GreyBadge>
+              <CalendarOutlined />
+              {data?.date}
+            </GreyBadge>
+            <GreyBadge>
+              <Clock />
+              {data?.time}
+            </GreyBadge>
+          </BadgeWrapper>
+        )}
       </Item>
       <RightSideWrapper>
-        <Badge color={data?.status?.toString()?.toLowerCase()}>{getStatusOnGoing(data?.status?.toLowerCase())}</Badge>
+        <Badge color={data?.status?.toString()?.toLowerCase()}>
+          {getStatusOnGoing(data?.status?.toLowerCase())}
+        </Badge>
         {data?.status?.toLowerCase() === "ongoing" && (
           <ButtonPrimary>Selesai</ButtonPrimary>
         )}
@@ -46,7 +66,6 @@ const Wrapper = styled.div`
     gap: 18px;
   }
 `;
-
 
 const getBgColor = ({ color }) => {
   switch (color?.toString()?.toLowerCase()) {

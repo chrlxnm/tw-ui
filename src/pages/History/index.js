@@ -72,7 +72,7 @@ const History = () => {
         ) : (
           data?.map((item) => (
             <Col span={24}>
-              <HistoryCard data={item}></HistoryCard>
+              <HistoryCard data={item} section={params?.section}></HistoryCard>
             </Col>
           ))
         )}
