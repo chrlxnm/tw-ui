@@ -107,7 +107,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
           <BadgeWrapper>
             <GreyBadge>
               <Users />
-              Kuota {data?.quota} orang
+              Kuota {data?.quota || '-'} orang
             </GreyBadge>
           </BadgeWrapper>
           <AlertBanner />
