@@ -208,7 +208,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
                   { value: 1, label: "1 Jam" },
                   { value: 2, label: "2 Jam" },
                   { value: 3, label: "3 Jam" },
-                  { value: 4, label: "4 Jam", disabled: true },
+                  { value: 4, label: "4 Jam" },
                 ]}
               />
             </Form.Item>
