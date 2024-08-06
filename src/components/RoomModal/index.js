@@ -6,12 +6,13 @@ import {
   message,
 } from "antd";
 import React, { useState } from "react";
+import moment, { duration } from "moment";
 
 import AlertBanner from "./Alert";
 import { ButtonPrimary } from "components/Button";
 import { Input } from "components/Input";
 import { ReactComponent as Users } from "assets/icons/users.svg";
-import moment from "moment";
+import { getDuration } from "utils";
 import styled from "styled-components";
 import twService from "utils/services";
 
@@ -20,6 +21,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const [timeList, setTimeList] = useState([]);
+  const [durationList, setDurationList] = useState([]);
 
   const onFinish = async (event) => {
     setLoading(true);
@@ -92,6 +94,11 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
     return current && current < moment().startOf("day");
   };
 
+  const onChangeTime = (selected) => {
+    setDurationList(getDuration(timeList, selected));
+    form.setFieldsValue({ duration: undefined });
+  };
+
   return (
     <Modal
       title="Form Pendaftaran Ruangan"
@@ -107,7 +114,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
           <BadgeWrapper>
             <GreyBadge>
               <Users />
-              Kuota {data?.quota || '-'} orang
+              Kuota {data?.quota || "-"} orang
             </GreyBadge>
           </BadgeWrapper>
           <AlertBanner />
@@ -189,6 +196,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
                 size="large"
                 placeholder="Pilih waktu mulai"
                 options={timeList}
+                onChange={onChangeTime}
               />
             </Form.Item>
             <Form.Item
@@ -204,12 +212,7 @@ const RoomModal = ({ data, visible, onClose, setAlert, alert }) => {
               <Select
                 size="large"
                 placeholder="Pilih waktu durasi"
-                options={[
-                  { value: 1, label: "1 Jam" },
-                  { value: 2, label: "2 Jam" },
-                  { value: 3, label: "3 Jam" },
-                  { value: 4, label: "4 Jam" },
-                ]}
+                options={durationList}
               />
             </Form.Item>
             <Form.Item

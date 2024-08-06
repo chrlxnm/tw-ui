@@ -1,6 +1,5 @@
 import { addDays, format, parse } from "date-fns";
-
-import { id } from "date-fns/locale";
+import { id, se } from "date-fns/locale";
 
 export function parseJwt(token) {
   var base64Url = token.split(".")[1];
@@ -83,4 +82,42 @@ const reverseStatusMapping = {
 // Function to get the Indonesian status, with default handling
 export function getStatusOnGoing(status) {
   return reverseStatusMapping[status] || status; // "Status not found" in Indonesian
+}
+
+export function getDuration(times, selectedTime) {
+  if (!times?.length || !selectedTime) {
+    return [];
+  }
+  const remapTimes = times?.sort()?.map((item)=> item?.value);
+  const timeInHours = remapTimes?.map((item) => Number(item?.split(":")?.[0]));
+  const selectedIndex = remapTimes.indexOf(selectedTime);
+  if (selectedIndex === -1) {
+    // Handle case where the selectedTime is not in the availableTime list
+    return [];
+  }
+
+  let durations = [];
+  let startIndex = selectedIndex;
+
+  for (let i = startIndex; i < timeInHours.length; i++) {
+    if (timeInHours[i + 1] - timeInHours[i] > 1) {
+      // If a gap greater than 1 hour is found, break
+      break;
+    } else {
+      durations.push({
+        value: i - startIndex + 1,
+        label: `${i - startIndex + 1} Jam`,
+      });
+    }
+  }
+
+  // Check if the loop ended without finding a gap
+  if (durations.length === 0 && timeInHours.length > 0) {
+    durations.push({
+      label: timeInHours.length - startIndex,
+      value: timeInHours.length - startIndex,
+    });
+  }
+
+  return durations;
 }
